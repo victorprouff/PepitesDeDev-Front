@@ -1,10 +1,15 @@
-<div class="card mt-4">
-    <h4 class="card-header py-3">You're logged in with Angular 14 & JWT!!</h4>
-    <div class="card-body">
-        <h6>Users from secure api end point</h6>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
+<div class="justify-content-end">
+    <div class="col-8 offset-2 mt-4">
+        <div class="card">
+            <h4 class="card-header py-3">Principe</h4>
+            <p class="py-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam aperiam, autem deleniti, ducimus esse eveniet fugiat fugit maiores nemo officia, omnis quidem recusandae sapiente sit tempora voluptate? Numquam, sunt.</p>
+            <div class="card-body">
+                <h6>Users from secure api end point</h6>
+                <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+                <ul *ngIf="users">
+                    <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
