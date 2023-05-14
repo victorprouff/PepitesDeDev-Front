@@ -5,10 +5,12 @@
             <p class="py-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam aperiam, autem deleniti, ducimus esse eveniet fugiat fugit maiores nemo officia, omnis quidem recusandae sapiente sit tempora voluptate? Numquam, sunt.</p>
             <div class="card-body">
                 <h6>Users from secure api end point</h6>
-                <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-                <ul *ngIf="users">
-                    <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-                </ul>
+                <div *ngIf="user">
+                    <ul>
+                        <li>{{user.email}}</li>
+                        <li>{{user.token}}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

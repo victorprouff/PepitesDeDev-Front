@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
 import {User} from "../models";
 import {UserService} from "../services/user.service";
+import {AuthenticationService} from "../services";
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
   loading = false;
-  users?: User[];
+  user?: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.loading = true;
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.loading = false;
-      this.users = users;
-    });
+    // this.user = Object.assign(new User(), localStorage.getItem('user'));
+    const user = this.authenticationService.userValue;
+    if (user) {
+      this.user = user;
+    }
   }
 }
