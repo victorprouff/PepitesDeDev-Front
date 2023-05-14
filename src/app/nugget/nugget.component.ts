@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Nugget } from '../models';
-import { NuggetService } from '../services/nugget-service';
+import { NuggetService } from '../services';
 
 @Component({
   selector: 'app-nugget',
   templateUrl: './nugget.component.html'
 })
 export class NuggetComponent {
-  nugget: Nugget | undefined;
+  nugget?: Nugget;
 
   constructor(private nuggetService: NuggetService){
   }
@@ -18,6 +18,8 @@ export class NuggetComponent {
   }
 
   getNugget(id: Guid){
-    this.nugget = this.nuggetService.get(id);
+    this.nuggetService.get(id).subscribe(nugget => {
+      this.nugget = nugget;
+    });
   }
 }

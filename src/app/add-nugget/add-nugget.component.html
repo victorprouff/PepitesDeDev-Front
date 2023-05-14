@@ -1,0 +1,26 @@
+<div class="card mt-5">
+    <div class="card-body">
+        <form [formGroup]="createNuggetForm"  (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label">Titre</label>
+                <input type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                    <div *ngIf="f.title.errors.required">Veuillez donner un titre à votre pépite</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contenu</label>
+                <input type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }">
+                <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
+                    <div *ngIf="f.content.errors.required">Veuillez remplir le contenu de votre pépite</div>
+                </div>
+            </div>
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Créer
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+        </form>
+    </div>
+</div>

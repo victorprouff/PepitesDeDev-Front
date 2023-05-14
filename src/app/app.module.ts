@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { NuggetsListComponent } from './nuggets-list';
 import { NuggetComponent } from './nugget/nugget.component';
 import { LoginComponent } from './login';
 import { HomeComponent } from './home';
+import { AddNuggetComponent } from './add-nugget/add-nugget.component';
 
 @NgModule({
   imports: [
@@ -20,14 +21,16 @@ import { HomeComponent } from './home';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
     NuggetsListComponent,
     NuggetComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AddNuggetComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

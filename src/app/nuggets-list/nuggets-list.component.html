@@ -1,1 +1,8 @@
-<p>nuggets-list works!</p>
+<div *ngIf="nuggets">
+    <div class="card" *ngFor="let nugget of nuggets">
+        <h4 class="card-header py-3">{{nugget.title}} - {{nugget.createdAt}}</h4>
+        <div class="card-body">
+            <div class="card-text">{{nugget.description}}</div>
+        </div>
+    </div>
+</div>
