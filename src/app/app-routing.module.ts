@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { HomeComponent } from './home';
 import { NuggetsListComponent } from './nuggets-list';
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./login";
+import {AuthGuard} from "./helper";
 
 const routes: Routes = [
-  { path: '', component: NuggetsListComponent },
+  { path: '', component: HomeComponent },
+  { path: 'list-nuggets', component: NuggetsListComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 
   // otherwise redirect to home
