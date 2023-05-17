@@ -7,11 +7,13 @@ import { LoginComponent } from "./login";
 import { HomeComponent } from './home';
 import { NuggetsListComponent } from './nuggets-list';
 import { AddNuggetComponent } from "./add-nugget/add-nugget.component";
+import {AddUserComponent} from "./add-user/add-user.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'list-nuggets', component: NuggetsListComponent, canActivate: [AuthGuard] },
+  { path: 'list-nuggets', component: NuggetsListComponent },
   { path: 'add-nugget', component: AddNuggetComponent, canActivate: [AuthGuard] },
+  { path: 'add-user', component: AddUserComponent },
   { path: 'login', component: LoginComponent },
 
   // otherwise redirect to home

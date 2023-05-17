@@ -1,8 +1,8 @@
 <div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
-        <h4 class="card-header py-3">Connexion</h4>
+        <h4 class="card-header py-3">Inscription</h4>
         <div class="card-body">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />

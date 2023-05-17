@@ -13,4 +13,9 @@ export class UserService {
 
   getUser(id: Guid ) {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
-  }}
+  }
+
+  create(email: string, password: string) {
+    return this.http.post(`${environment.apiUrl}/user`, { email, password });
+  }
+}

@@ -5,7 +5,8 @@
     <a class="nav-item nav-link" routerLink="/list-nuggets" routerLinkActive="active" *ngIf="user">Liste des Pépites !</a>
     <a class="nav-item nav-link" routerLink="/add-nugget" routerLinkActive="active" *ngIf="user">Ajout d'une pépite</a>
     <button class="btn btn-link nav-item nav-link" (click)="logout()" *ngIf="user">Logout</button>
-    <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user">Login</a>
+    <a class="nav-item nav-link" routerLink="/add-user" routerLinkActive="active" *ngIf="!user">Inscription</a>
+    <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user">Connexion</a>
   </div>
 </nav>
 
