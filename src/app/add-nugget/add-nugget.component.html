@@ -15,6 +15,11 @@
                     <div *ngIf="f.content.errors.required">Veuillez remplir le contenu de votre pépite</div>
                 </div>
             </div>
+
+            <h3 id="focusBlur">Default editor with height of 200px</h3>
+            <p>focused: {{ focused }}, blurred: {{ blurred }}</p>
+            <quill-editor [styles]="{height: '200px'}" ></quill-editor>
+
             <button [disabled]="loading" class="btn btn-primary">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Créer

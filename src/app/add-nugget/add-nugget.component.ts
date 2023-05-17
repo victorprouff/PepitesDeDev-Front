@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NuggetService } from "../services";
 import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill'
+import Quill from 'quill'
 
 @Component({
   selector: 'app-add-nugget',
@@ -13,6 +15,9 @@ export class AddNuggetComponent {
   submitted = false;
   loading = false;
   error = '';
+
+  blurred = false
+  focused = false
 
   constructor(
       private formBuilder: FormBuilder,
@@ -52,5 +57,15 @@ export class AddNuggetComponent {
             this.loading = false;
           }
         });
+  }
+
+  created(event: Quill) {
+    // tslint:disable-next-line:no-console
+    console.log('editor-created', event)
+  }
+
+  changedEditor(event: EditorChangeContent | EditorChangeSelection) {
+    // tslint:disable-next-line:no-console
+    console.log('editor-change', event)
   }
 }

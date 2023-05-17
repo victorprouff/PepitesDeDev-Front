@@ -14,6 +14,7 @@ import { NuggetComponent } from './nugget/nugget.component';
 import { LoginComponent } from './login';
 import { HomeComponent } from './home';
 import { AddNuggetComponent } from './add-nugget/add-nugget.component';
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AddNuggetComponent } from './add-nugget/add-nugget.component';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    QuillModule.forRoot(),
   ],
   declarations: [
     AppComponent,
