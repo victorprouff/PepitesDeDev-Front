@@ -1,6 +1,11 @@
 <div *ngIf="nuggets">
     <div class="card" *ngFor="let nugget of nuggets">
-        <h4 class="card-header py-3">{{nugget.title}} - {{nugget.createdAt}}</h4>
+        <h4 class="card-header py-3">
+            {{nugget.title}} - {{nugget.createdAt}}
+            <div *ngIf="userId == nugget.userId">
+                <button type="button" class="btn btn-primary" (click)="update(nugget.id)">Modifier</button>
+            </div>
+        </h4>
         <div class="card-body">
             <div class="card-text">{{nugget.content}}</div>
         </div>

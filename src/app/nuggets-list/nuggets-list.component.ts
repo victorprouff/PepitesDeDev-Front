@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Nugget } from "../models";
-import { NuggetService } from "../services";
+import {AuthenticationService, NuggetService} from "../services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nuggets-list',
@@ -8,9 +9,17 @@ import { NuggetService } from "../services";
 })
 export class NuggetsListComponent {
   nuggets: Nugget[] = [];
-  constructor(private nuggetService: NuggetService) { }
+  userId: string = '';
+
+  constructor(
+      private nuggetService: NuggetService,
+      private router: Router,
+      private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit() {
+    this.userId = this.authenticationService.userValue?.id || ''
+
     this.getNuggets();
   }
 
@@ -18,5 +27,9 @@ export class NuggetsListComponent {
     this.nuggetService.getList().subscribe(nuggets => {
       this.nuggets = nuggets;
     })
+  }
+
+  update(id: string) {
+    this.router.navigate(['update-nugget', id]);
   }
 }

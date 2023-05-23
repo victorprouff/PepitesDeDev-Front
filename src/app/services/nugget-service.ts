@@ -14,8 +14,11 @@ export class NuggetService {
     return this.http.post(`${environment.apiUrl}/nugget`, { title, content });
   }
 
-  update(title: string, content: string){
-    return this.http.put(`${environment.apiUrl}/nugget`, { title, content });
+update(id: string, title: string, content: string){
+    return this.http.put(`${environment.apiUrl}/nugget/${id}`, {
+          Title: title,
+          Content: content
+        });
   }
 
   getList(){

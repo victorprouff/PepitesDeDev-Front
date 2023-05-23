@@ -15,6 +15,7 @@ import { LoginComponent } from './login';
 import { HomeComponent } from './home';
 import { AddNuggetComponent } from './add-nugget/add-nugget.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { UpdateNuggetComponent } from './update-nugget/update-nugget.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     LoginComponent,
     HomeComponent,
     AddNuggetComponent,
-    AddUserComponent
+    AddUserComponent,
+    UpdateNuggetComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
