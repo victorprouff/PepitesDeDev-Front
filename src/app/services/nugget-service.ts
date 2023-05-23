@@ -21,6 +21,10 @@ update(id: string, title: string, content: string){
         });
   }
 
+    delete(id: string){
+        return this.http.delete(`${environment.apiUrl}/nugget/${id}`);
+    }
+
   getList(){
     return this.http.get<Nugget[]>(`${environment.apiUrl}/nugget`);
   }

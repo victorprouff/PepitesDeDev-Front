@@ -45,7 +45,7 @@ export class AddNuggetComponent {
         .pipe(first())
         .subscribe({
           next:() => {
-            this.router.navigate(['/list-nugget']);
+            this.router.navigate(['/list-nuggets']);
           },
           error: error => {
             this.error = error;

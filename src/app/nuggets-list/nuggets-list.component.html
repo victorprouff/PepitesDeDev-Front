@@ -4,6 +4,7 @@
             {{nugget.title}} - {{nugget.createdAt}}
             <div *ngIf="userId == nugget.userId">
                 <button type="button" class="btn btn-primary" (click)="update(nugget.id)">Modifier</button>
+                <button type="button" class="btn btn-danger" (click)="open(deleteModal, nugget.id)">Supprimer</button>
             </div>
         </h4>
         <div class="card-body">
@@ -11,3 +12,19 @@
         </div>
     </div>
 </div>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Suppression de la pépite</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        Etes-vous sur de vouloir supprimer cette pépite ?
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.dismiss('Cross click')">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="delete(); modal.close('Save click')">Supprimer</button>
+    </div>
+</ng-template>
