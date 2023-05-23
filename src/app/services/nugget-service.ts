@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Guid } from 'guid-typescript';
 import { Nugget } from '../models';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environnements/environnement";
@@ -8,8 +7,6 @@ import {environment} from "../environnements/environnement";
   providedIn: 'root'
 })
 export class NuggetService {
-  nuggets: Nugget[] = [];
-
   constructor(private http: HttpClient) {
   }
 
@@ -17,11 +14,15 @@ export class NuggetService {
     return this.http.post(`${environment.apiUrl}/nugget`, { title, content });
   }
 
+  update(title: string, content: string){
+    return this.http.put(`${environment.apiUrl}/nugget`, { title, content });
+  }
+
   getList(){
     return this.http.get<Nugget[]>(`${environment.apiUrl}/nugget`);
   }
 
-  get(id: Guid){
-    return this.http.get<Nugget>(`${environment.apiUrl}/nugget${id}`);
+  get(id: string){
+    return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
   }
 }

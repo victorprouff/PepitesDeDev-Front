@@ -1,8 +1,6 @@
-import { Guid } from "guid-typescript";
-
 export class User {
     constructor(
-        id?: Guid,
+        id?: string,
         email?: string,
         token?: string
     ) {
@@ -10,7 +8,7 @@ export class User {
         this.email = email;
         this.token = token
     }
-    id?: Guid;
+    id?: string;
     email?: string;
     token?: string;
 }

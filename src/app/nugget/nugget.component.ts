@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Guid } from 'guid-typescript';
 import { Nugget } from '../models';
 import { NuggetService } from '../services';
 
@@ -13,11 +12,11 @@ export class NuggetComponent {
   constructor(private nuggetService: NuggetService){
   }
 
-  ngOnInit(id: Guid): void {
+  ngOnInit(id: string): void {
     this.getNugget(id);
   }
 
-  getNugget(id: Guid){
+  getNugget(id: string){
     this.nuggetService.get(id).subscribe(nugget => {
       this.nugget = nugget;
     });
