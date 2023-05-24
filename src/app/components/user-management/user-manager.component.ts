@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { Nugget } from "../models";
-import {AuthenticationService, NuggetService} from "../services";
+import {Nugget} from "../../models";
+import {AuthenticationService, NuggetService} from "../../services";
 import {Router} from "@angular/router";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-nuggets-list',
-  templateUrl: './nuggets-list.component.html'
+  selector: 'app-user-manager',
+  templateUrl: './user-manager.component.html'
 })
-export class NuggetsListComponent {
+export class UserManagerComponent {
   nuggets: Nugget[] = [];
   userId: string = '';
   deleteNuggetId = '';
@@ -18,7 +18,8 @@ export class NuggetsListComponent {
       private router: Router,
       private authenticationService: AuthenticationService,
       private modalService: NgbModal
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.userId = this.authenticationService.userValue?.id || ''
@@ -27,7 +28,7 @@ export class NuggetsListComponent {
   }
 
   getNuggets(){
-    this.nuggetService.getList().subscribe(nuggets => {
+    this.nuggetService.getListByUserId().subscribe(nuggets => {
       this.nuggets = nuggets;
     })
   }

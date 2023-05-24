@@ -4,18 +4,19 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { JwtInterceptor, ErrorInterceptor } from './helper';
 
-import { NuggetsListComponent } from './nuggets-list';
-import { NuggetComponent } from './nugget/nugget.component';
-import { LoginComponent } from './login';
-import { HomeComponent } from './home';
-import { AddNuggetComponent } from './add-nugget/add-nugget.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import { UpdateNuggetComponent } from './update-nugget/update-nugget.component';
+import { NuggetsListComponent } from './components/nuggets-list';
+import { NuggetComponent } from './components/nugget/nugget.component';
+import { LoginComponent } from './components/login';
+import { HomeComponent } from './components/home';
+import { AddNuggetComponent } from './components/add-nugget/add-nugget.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { UpdateNuggetComponent } from './components/update-nugget/update-nugget.component';
+import { UserManagerComponent } from './components/user-management/user-manager.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { UpdateNuggetComponent } from './update-nugget/update-nugget.component';
     HomeComponent,
     AddNuggetComponent,
     AddUserComponent,
-    UpdateNuggetComponent
+    UpdateNuggetComponent,
+    UserManagerComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -32,4 +32,8 @@ update(id: string, title: string, content: string){
   get(id: string){
     return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
   }
+
+    getListByUserId() {
+        return this.http.get<Nugget[]>(`${environment.apiUrl}/nugget/user`);
+    }
 }

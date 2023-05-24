@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthenticationService } from "../services";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {first} from "rxjs/operators";
+import {AuthenticationService} from "../../services";
+import {UserService} from "../../services/user.service";
 
-@Component({ templateUrl: 'login.component.html' })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+@Component({
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html'
+})
+export class AddUserComponent implements OnInit {
+  createUserForm!: FormGroup;
   loading = false;
   submitted = false;
   error = '';
@@ -15,35 +19,34 @@ export class LoginComponent implements OnInit {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
-      private authenticationService: AuthenticationService
+      private authenticationService: AuthenticationService,
+      private userService: UserService
   ) {
-    // redirect to home if already logged in
     if (this.authenticationService.userValue) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.createUserForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.createUserForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.createUserForm.invalid) {
       return;
     }
 
     this.error = '';
     this.loading = true;
-    this.authenticationService.login(this.f.email.value, this.f.password.value)
+    this.userService.create(this.f.email.value, this.f.password.value)
         .pipe(first())
         .subscribe({
           next: () => {

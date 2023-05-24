@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService, NuggetService} from "../services";
+import {AuthenticationService, NuggetService} from "../../services";
 import {first} from "rxjs/operators";
-import {Nugget} from "../models";
+import {Nugget} from "../../models";
 
 @Component({
   selector: 'app-update-nugget',
@@ -35,7 +35,7 @@ ngOnInit() {
     this.nugget = nugget;
 
     if (this.authenticationService.userValue?.id != this.nugget?.userId) {
-      this.router.navigate(['/list-nuggets']);
+      this.router.navigate(['/']);
     }
   })
 
@@ -63,7 +63,7 @@ ngOnInit() {
         .pipe(first())
         .subscribe({
           next:() => {
-            this.router.navigate(['/list-nuggets']);
+            this.router.navigate(['/']);
           },
           error: error => {
             this.error = error;

@@ -3,20 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {AuthGuard} from "./helper";
 
-import { LoginComponent } from "./login";
-import { HomeComponent } from './home';
-import { NuggetsListComponent } from './nuggets-list';
-import { AddNuggetComponent } from "./add-nugget/add-nugget.component";
-import {AddUserComponent} from "./add-user/add-user.component";
-import {UpdateNuggetComponent} from "./update-nugget/update-nugget.component";
+import { LoginComponent } from "./components/login";
+import { NuggetsListComponent } from './components/nuggets-list';
+import { AddNuggetComponent } from "./components/add-nugget/add-nugget.component";
+import {AddUserComponent} from "./components/add-user/add-user.component";
+import {UpdateNuggetComponent} from "./components/update-nugget/update-nugget.component";
+import {UserManagerComponent} from "./components/user-management/user-manager.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'list-nuggets', component: NuggetsListComponent },
+  { path: '', component: NuggetsListComponent },
   { path: 'add-nugget', component: AddNuggetComponent, canActivate: [AuthGuard] },
   { path: 'update-nugget/:id', component: UpdateNuggetComponent, canActivate: [AuthGuard] },
   { path: 'add-user', component: AddUserComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

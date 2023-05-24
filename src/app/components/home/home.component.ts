@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {User} from "../models";
-import {UserService} from "../services/user.service";
-import {AuthenticationService} from "../services";
+import {User} from "../../models";
+import {UserService} from "../../services/user.service";
+import {AuthenticationService} from "../../services";
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {

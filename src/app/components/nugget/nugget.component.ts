@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Nugget } from '../models';
-import { NuggetService } from '../services';
+import { Nugget } from '../../models';
+import { NuggetService } from '../../services';
 
 @Component({
   selector: 'app-nugget',

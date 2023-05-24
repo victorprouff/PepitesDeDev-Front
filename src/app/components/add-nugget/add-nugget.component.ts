@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NuggetService } from "../services";
+import { NuggetService } from "../../services";
 import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 
@@ -45,7 +45,7 @@ export class AddNuggetComponent {
         .pipe(first())
         .subscribe({
           next:() => {
-            this.router.navigate(['/list-nuggets']);
+            this.router.navigate(['']);
           },
           error: error => {
             this.error = error;
