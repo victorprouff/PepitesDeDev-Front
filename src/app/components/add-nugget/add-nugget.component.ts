@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NuggetService } from "../../services";
-import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import {RedirectService} from "../../services/redirect.service";
 
 @Component({
   selector: 'app-add-nugget',
@@ -16,7 +16,7 @@ export class AddNuggetComponent {
 
   constructor(
       private formBuilder: FormBuilder,
-      private router: Router,
+      private redirect: RedirectService,
       private nuggetService: NuggetService
   ) {
   }
@@ -45,7 +45,7 @@ export class AddNuggetComponent {
         .pipe(first())
         .subscribe({
           next:() => {
-            this.router.navigate(['']);
+            this.redirect.toHome();
           },
           error: error => {
             this.error = error;

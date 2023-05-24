@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {environment} from "../environnements/environnement";
 import {User} from "../models";
+import {RedirectService} from "./redirect.service";
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +13,7 @@ export class AuthenticationService {
   public user: Observable<User | null>;
 
   constructor(
-      private router: Router,
+      private redirect: RedirectService,
       private http: HttpClient
   ) {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
@@ -38,6 +38,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    this.redirect.toLogin();
   }
 }

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {AuthenticationService, NuggetService} from "../../services";
 import {first} from "rxjs/operators";
 import {Nugget} from "../../models";
+import {RedirectService} from "../../services/redirect.service";
 
 @Component({
   selector: 'app-update-nugget',
@@ -20,7 +21,7 @@ export class UpdateNuggetComponent {
   constructor(
       private formBuilder: FormBuilder,
       private Activatedroute: ActivatedRoute,
-      private router: Router,
+      private redirect: RedirectService,
       private nuggetService: NuggetService,
       private authenticationService: AuthenticationService
   ) {
@@ -35,7 +36,7 @@ ngOnInit() {
     this.nugget = nugget;
 
     if (this.authenticationService.userValue?.id != this.nugget?.userId) {
-      this.router.navigate(['/']);
+      this.redirect.toHome();
     }
   })
 
@@ -63,7 +64,7 @@ ngOnInit() {
         .pipe(first())
         .subscribe({
           next:() => {
-            this.router.navigate(['/']);
+            this.redirect.toHome();
           },
           error: error => {
             this.error = error;

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Nugget} from "../../models";
 import {AuthenticationService, NuggetService} from "../../services";
-import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {RedirectService} from "../../services/redirect.service";
 
 @Component({
   selector: 'app-user-manager',
@@ -15,7 +15,7 @@ export class UserManagerComponent {
 
   constructor(
       private nuggetService: NuggetService,
-      private router: Router,
+      private redirect: RedirectService,
       private authenticationService: AuthenticationService,
       private modalService: NgbModal
   ) {
@@ -34,7 +34,7 @@ export class UserManagerComponent {
   }
 
   update(id: string) {
-    this.router.navigate(['update-nugget', id]);
+    this.redirect.toUpdateNugget(id);
   }
 
   delete() {

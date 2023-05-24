@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from "@angular/router";
+import { ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {AuthenticationService} from "../../services";
 import {UserService} from "../../services/user.service";
+import {RedirectService} from "../../services/redirect.service";
 
 @Component({
   selector: 'app-add-user',
@@ -18,12 +19,12 @@ export class AddUserComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
-      private router: Router,
+      private redirect: RedirectService,
       private authenticationService: AuthenticationService,
       private userService: UserService
   ) {
     if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+      this.redirect.toHome();
     }
   }
 
@@ -50,9 +51,7 @@ export class AddUserComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => {
-            // get return url from route parameters or default to '/'
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-            this.router.navigate([returnUrl]);
+            this.redirect.toHome()
           },
           error: error => {
             this.error = error;

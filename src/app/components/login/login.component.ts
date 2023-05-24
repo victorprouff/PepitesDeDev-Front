@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from "../../services";
+import {RedirectService} from "../../services/redirect.service";
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -14,12 +15,12 @@ export class LoginComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
-      private router: Router,
+      private redirect: RedirectService,
       private authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+      this.redirect.toHome();
     }
   }
 
@@ -47,9 +48,7 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => {
-            // get return url from route parameters or default to '/'
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-            this.router.navigate([returnUrl]);
+            this.redirect.toHome();
           },
           error: error => {
             this.error = error;
