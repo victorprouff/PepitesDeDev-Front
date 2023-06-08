@@ -10,7 +10,14 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Contenu</label>
-                <textarea type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }" value="{{nugget?.content}}"></textarea>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <textarea type="text" rows="10" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }" value="{{nugget?.content}}"></textarea>
+                    </div>
+                    <div class="col-lg-6">
+                        <markdown lineNumbers [data]="f.content.value || data"></markdown>
+                    </div>
+                </div>
                 <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
                     <div *ngIf="f.content.errors.required">Veuillez remplir le contenu de votre pépite</div>
                 </div>

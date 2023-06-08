@@ -14,6 +14,7 @@ export class UpdateNuggetComponent {
   updateNuggetForm!: FormGroup;
   submitted = false;
   loading = false;
+  data? = '';
   error = '';
   id = '';
   nugget?: Nugget;
@@ -34,6 +35,7 @@ ngOnInit() {
 
   this.nuggetService.get(this.id).subscribe(nugget => {
     this.nugget = nugget;
+    this.data = this.nugget?.content;
 
     if (this.authenticationService.userValue?.id != this.nugget?.userId) {
       this.redirect.toHome();

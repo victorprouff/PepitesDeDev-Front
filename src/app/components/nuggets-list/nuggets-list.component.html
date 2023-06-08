@@ -1,7 +1,6 @@
 
 <div *ngIf="nuggets">
-
-    <div class="card" *ngFor="let nugget of nuggets">
+    <div class="card mt-4" *ngFor="let nugget of nuggets">
         <div class="row">
             <div class="col">
                 <h4 class="card-header py-3">
@@ -12,7 +11,7 @@
                     </div>
                 </h4>
                 <div class="card-body">
-                    <div class="card-text" markdown lineNumbers>{{nugget.content}}</div>
+                    <markdown lineNumbers>{{nugget.content}}</markdown>
                 </div>
             </div>
         </div>
