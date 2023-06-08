@@ -10,7 +10,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Contenu</label>
-                <input type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }">
+                <textarea markdown clipboard type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></textarea>
                 <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
                     <div *ngIf="f.content.errors.required">Veuillez remplir le contenu de votre pépite</div>
                 </div>

@@ -17,6 +17,7 @@ import { AddNuggetComponent } from './components/add-nugget/add-nugget.component
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateNuggetComponent } from './components/update-nugget/update-nugget.component';
 import { UserManagerComponent } from './components/user-management/user-manager.component';
+import {ClipboardButtonComponent, ClipboardOptions, MarkdownModule} from "ngx-markdown";
 
 @NgModule({
   imports: [
@@ -25,7 +26,15 @@ import { UserManagerComponent } from './components/user-management/user-manager.
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MarkdownModule.forRoot({
+      clipboardOptions: {
+        provide: ClipboardOptions,
+        useValue: {
+          buttonComponent: ClipboardButtonComponent,
+        },
+      }
+    })
   ],
   declarations: [
     AppComponent,
