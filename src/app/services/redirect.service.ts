@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import {state} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root'
