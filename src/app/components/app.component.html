@@ -1,16 +1,26 @@
-<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">Pépites de code</a>
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">Liste des Pépites !</a>
-    <a class="nav-item nav-link" routerLink="/add-nugget" routerLinkActive="active" *ngIf="user">Ajout d'une pépite</a>
-    <button class="btn btn-link nav-item nav-link" (click)="logout()" *ngIf="user">Logout</button>
-    <a class="nav-item nav-link" routerLink="/add-user" routerLinkActive="active" *ngIf="!user">Inscription</a>
-    <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user">Connexion</a>
-    <a class="nav-item nav-link" routerLink="/user-manager" routerLinkActive="active" *ngIf="user">Gestion de compte</a>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark px-5">
+  <div class="container">
+    <ul class="navbar-nav justify-content-start">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Les Pépites</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/add-nugget" routerLinkActive="active" *ngIf="user">Ajout d'une pépite</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user">Connexion</a>
+        <a class="nav-item nav-link" routerLink="/user-manager" routerLinkActive="active" *ngIf="user">Gestion de compte</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" routerLink="/add-user" routerLinkActive="active" *ngIf="!user">Inscription</a>
+        <a class="nav-item nav-link" (click)="logout()" *ngIf="user">Logout</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
-<div class="container">
+<div class="container" style="margin-top: 70px;">
   <router-outlet></router-outlet>
 </div>
