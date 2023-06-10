@@ -17,24 +17,28 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateNuggetComponent } from './components/update-nugget/update-nugget.component';
 import { UserManagerComponent } from './components/user-management/user-manager.component';
 import {ClipboardButtonComponent, ClipboardOptions, MarkdownModule} from "ngx-markdown";
+import {NgOptimizedImage} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MarkdownModule.forRoot({
-      clipboardOptions: {
-        provide: ClipboardOptions,
-        useValue: {
-          buttonComponent: ClipboardButtonComponent,
-        },
-      }
-    })
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgbModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MarkdownModule.forRoot({
+            clipboardOptions: {
+                provide: ClipboardOptions,
+                useValue: {
+                    buttonComponent: ClipboardButtonComponent,
+                },
+            }
+        }),
+        NgOptimizedImage,
+        MatIconModule
+    ],
   declarations: [
     AppComponent,
     NuggetsListComponent,
