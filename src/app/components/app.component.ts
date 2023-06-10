@@ -7,7 +7,6 @@ import {User} from "../models";
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'pepite-du-code-front';
   user?: User | null;
 
   constructor(private authenticationService: AuthenticationService) {

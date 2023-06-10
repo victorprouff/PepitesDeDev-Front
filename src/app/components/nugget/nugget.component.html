@@ -1,2 +1,43 @@
-<h2>{{nugget?.title}}</h2>
-<p>{{nugget?.content}}</p>
+<div class="card mt-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-lg-8">
+                <h4><a class="nav-link" href="/nugget/{{nugget?.id}}">{{nugget?.title}}</a></h4>
+                {{nugget?.createdAt | date:'d MMM yyyy - h:mm' }}
+            </div>
+            <div class="col-lg-4 d-flex justify-content-end align-items-start" *ngIf="userId == nugget?.userId && nugget != undefined">
+                <button type="button" class="btn btn-outline-primary me-2" (click)="update(nugget.id)">Modifier</button>
+                <button type="button" class="btn btn-outline-danger me-2" (click)="open(deleteModal, nugget.id)">Supprimer</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <markdown *ngIf="nugget != undefined" lineNumbers>{{nugget.content}}</markdown>
+    </div>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">Précédente</button>
+    </div>
+    <div class="col-lg-10"></div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">Suivante</button>
+    </div>
+</div>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Suppression de la pépite</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        Etes-vous sur de vouloir supprimer cette pépite ?
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.dismiss('Cross click')">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="delete(); modal.close('Save click')">Supprimer</button>
+    </div>
+</ng-template>

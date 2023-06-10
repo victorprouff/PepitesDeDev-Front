@@ -9,9 +9,11 @@ import { AddNuggetComponent } from "./components/add-nugget/add-nugget.component
 import {AddUserComponent} from "./components/add-user/add-user.component";
 import {UpdateNuggetComponent} from "./components/update-nugget/update-nugget.component";
 import {UserManagerComponent} from "./components/user-management/user-manager.component";
+import {NuggetComponent} from "./components/nugget/nugget.component";
 
 const routes: Routes = [
   { path: '', component: NuggetsListComponent },
+  { path: 'nugget/:id', component: NuggetComponent },
   { path: 'add-nugget', component: AddNuggetComponent, canActivate: [AuthGuard] },
   { path: 'update-nugget/:id', component: UpdateNuggetComponent, canActivate: [AuthGuard] },
   { path: 'add-user', component: AddUserComponent },
