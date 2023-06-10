@@ -38,6 +38,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
     this.userSubject.next(null);
-    this.redirect.toLogin();
+    this.redirect.toHome();
   }
 }

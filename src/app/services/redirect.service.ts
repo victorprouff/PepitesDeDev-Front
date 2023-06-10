@@ -14,7 +14,7 @@ export class RedirectService {
     this.router.navigate(['/login'], { queryParams: { returnUrl: url } });
   }
   toHome(){
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   toUpdateNugget(id: string){

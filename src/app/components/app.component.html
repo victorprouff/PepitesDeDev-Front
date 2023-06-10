@@ -11,11 +11,15 @@
     <ul class="navbar-nav justify-content-end">
       <li class="nav-item">
         <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user">Connexion</a>
-        <a class="nav-item nav-link" routerLink="/user-manager" routerLinkActive="active" *ngIf="user">Gestion de compte</a>
+        <a class="nav-item nav-link" routerLink="/user-manager" routerLinkActive="active" *ngIf="user">
+          <mat-icon class="align-middle">person</mat-icon>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" routerLink="/add-user" routerLinkActive="active" *ngIf="!user">Inscription</a>
-        <a class="nav-item nav-link" (click)="logout()" *ngIf="user">Logout</a>
+        <a class="nav-item nav-link" routerLink="/add-user" routerLinkActive="active" *ngIf="!user">Créer un compte</a>
+        <a class="nav-item nav-link" (click)="logout()" *ngIf="user">
+          <mat-icon class="align-middle">logout</mat-icon>
+        </a>
       </li>
     </ul>
   </div>
