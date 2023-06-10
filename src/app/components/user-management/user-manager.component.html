@@ -1,5 +1,9 @@
 <h2>Mes pépites</h2>
 
+nbPage : {{nbPage}}
+itemsPerPage : {{itemsPerPage}}
+totalItemsPages : {{totalItemsPages}}
+
 <div *ngIf="nuggets">
     <div class="card mt-4" *ngFor="let nugget of nuggets">
         <div class="card-header py-3">
@@ -19,6 +23,9 @@
         </div>
     </div>
 </div>
+
+<button type="button" class="btn btn-primary" (click)="previousPage()">Précédente</button>
+<button type="button" class="btn btn-primary" (click)="nextPage()">Suivante</button>
 
 <ng-template #deleteModal let-modal>
     <div class="modal-header">

@@ -23,12 +23,12 @@ export class NuggetsListComponent {
   ngOnInit() {
     this.userId = this.authenticationService.userValue?.id || ''
 
-    this.getNuggets();
+    this.getNuggets(3, 0);
   }
 
-  getNuggets(){
-    this.nuggetService.getList().subscribe(nuggets => {
-      this.nuggets = nuggets;
+  getNuggets(limit: number, offset: number){
+    this.nuggetService.getList(limit, offset).subscribe(result => {
+      this.nuggets = result.nuggets;
     })
   }
 

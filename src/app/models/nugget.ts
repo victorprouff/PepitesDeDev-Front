@@ -4,7 +4,7 @@ export class Nugget {
     userId: string;
     title: string;
     content: string;
-    createdAt: Date
+    createdAt: Date;
 
     constructor(id: string, userId: string, title: string, content: string, createdAt: Date){
         this.id = id;

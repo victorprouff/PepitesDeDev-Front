@@ -1,52 +1,74 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Nugget} from "../../models";
 import {AuthenticationService, NuggetService} from "../../services";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {RedirectService} from "../../services/redirect.service";
 
 @Component({
-  selector: 'app-user-manager',
-  templateUrl: './user-manager.component.html'
+    selector: 'app-user-manager',
+    templateUrl: './user-manager.component.html'
 })
 export class UserManagerComponent {
-  nuggets: Nugget[] = [];
-  userId: string = '';
-  deleteNuggetId = '';
+    nuggets: Nugget[] = [];
+    userId = '';
+    deleteNuggetId = '';
 
-  constructor(
-      private nuggetService: NuggetService,
-      private redirect: RedirectService,
-      private authenticationService: AuthenticationService,
-      private modalService: NgbModal
-  ) {
-  }
+    itemsPerPage = 2;
 
-  ngOnInit() {
-    this.userId = this.authenticationService.userValue?.id || ''
+    totalItemsPages = 0;
+    nbPage = 0;
+    currentPage = 0;
 
-    this.getNuggets();
-  }
+    constructor(
+        private nuggetService: NuggetService,
+        private redirect: RedirectService,
+        private authenticationService: AuthenticationService,
+        private modalService: NgbModal
+    ) {
+    }
 
-  getNuggets(){
-    this.nuggetService.getListByUserId().subscribe(nuggets => {
-      this.nuggets = nuggets;
-    })
-  }
+    ngOnInit() {
+        this.userId = this.authenticationService.userValue?.id || ''
 
-  update(id: string) {
-    this.redirect.toUpdateNugget(id);
-  }
+        this.getNuggets(this.itemsPerPage, 0);
+    }
 
-  delete() {
-    this.nuggetService.delete(this.deleteNuggetId).subscribe(_ =>
-    {
-      this.ngOnInit();
-    });
-  }
+    getNuggets(limit: number, offset: number) {
+        this.nuggetService.getListByUserId(limit, offset)
+            .subscribe(result => {
+                this.nuggets = result.nuggets;
+                this.totalItemsPages = result.nbOfNuggets
+                this.nbPage = this.getNbOfPage(this.totalItemsPages)
+            })
+    }
 
-  open(content:any, nuggetId: string) {
-    this.deleteNuggetId = nuggetId;
+    previousPage() {
+        this.getNuggets(this.itemsPerPage, this.currentPage * this.itemsPerPage);
+        this.currentPage = this.currentPage - 1;
+    }
 
-    this.modalService.open(content).result.then();
-  }
+    nextPage() {
+        this.getNuggets(this.itemsPerPage, this.currentPage * this.itemsPerPage);
+        this.currentPage = this.currentPage + 1;
+    }
+
+    update(id: string) {
+        this.redirect.toUpdateNugget(id);
+    }
+
+    delete() {
+        this.nuggetService.delete(this.deleteNuggetId).subscribe(_ => {
+            this.ngOnInit();
+        });
+    }
+
+    open(content: any, nuggetId: string) {
+        this.deleteNuggetId = nuggetId;
+
+        this.modalService.open(content).result.then();
+    }
+
+    getNbOfPage(nbOfNuggets : number){
+        return Math.ceil(nbOfNuggets / this.itemsPerPage);
+    }
 }
