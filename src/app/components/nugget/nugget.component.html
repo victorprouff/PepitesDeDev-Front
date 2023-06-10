@@ -7,10 +7,10 @@
             </div>
             <div class="col-sm-2 d-flex justify-content-end align-items-start btn-group" role="group" *ngIf="userId == nugget?.userId && nugget != undefined">
                 <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">
-                    <mat-icon>edit_note</mat-icon>
+                    <mat-icon class="align-middle">edit_note</mat-icon>
                 </button>
                 <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal, nugget.id)">
-                    <mat-icon>delete</mat-icon>
+                    <mat-icon class="align-middle">delete</mat-icon>
                 </button>
             </div>
         </div>
@@ -20,13 +20,17 @@
     </div>
 </div>
 
-<div class="row mt-4 mb-4">
+<div class="row mt-4">
     <div class="col-lg-1">
-        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">Précédente</button>
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">
+            <mat-icon class="align-middle">arrow_back_ios</mat-icon>
+        </button>
     </div>
-    <div class="col-lg-10"></div>
+    <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
     <div class="col-lg-1">
-        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">Suivante</button>
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">
+            <mat-icon class="align-middle">arrow_forward_ios</mat-icon>
+        </button>
     </div>
 </div>
 

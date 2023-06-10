@@ -9,15 +9,14 @@ import { RedirectService } from "../../services/redirect.service";
   templateUrl: './nuggets-list.component.html'
 })
 export class NuggetsListComponent {
+  itemsPerPage = 5;
+  currentPage = 1;
+
   nuggets: Nugget[] = [];
   userId: string = '';
   deleteNuggetId = '';
-
-  itemsPerPage = 2;
-
   totalItemsPages = 0;
   nbPage = 0;
-  currentPage = 1;
 
   constructor(
       private nuggetService: NuggetService,

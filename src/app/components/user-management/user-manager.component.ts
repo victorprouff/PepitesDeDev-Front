@@ -9,15 +9,14 @@ import {RedirectService} from "../../services/redirect.service";
     templateUrl: './user-manager.component.html'
 })
 export class UserManagerComponent {
+    itemsPerPage = 5;
+    currentPage = 1;
+
     nuggets: Nugget[] = [];
     userId = '';
     deleteNuggetId = '';
-
-    itemsPerPage = 2;
-
     totalItemsPages = 0;
     nbPage = 0;
-    currentPage = 1;
 
     constructor(
         private nuggetService: NuggetService,
