@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h4>{{nugget.title}}</h4>
-                    {{nugget.createdAt}}
+                    {{nugget.createdAt | date:'d MMM yyyy - h:mm' }}
                 </div>
                 <div class="col-lg-4" *ngIf="userId == nugget.userId">
                     <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">Modifier</button>
