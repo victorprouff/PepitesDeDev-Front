@@ -17,7 +17,7 @@ export class UserManagerComponent {
 
     totalItemsPages = 0;
     nbPage = 0;
-    currentPage = 0;
+    currentPage = 1;
 
     constructor(
         private nuggetService: NuggetService,
@@ -30,11 +30,11 @@ export class UserManagerComponent {
     ngOnInit() {
         this.userId = this.authenticationService.userValue?.id || ''
 
-        this.getNuggets(this.itemsPerPage, 0);
+        this.getNuggets();
     }
 
-    getNuggets(limit: number, offset: number) {
-        this.nuggetService.getListByUserId(limit, offset)
+    getNuggets() {
+        this.nuggetService.getListByUserId(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
             .subscribe(result => {
                 this.nuggets = result.nuggets;
                 this.totalItemsPages = result.nbOfNuggets
@@ -43,13 +43,13 @@ export class UserManagerComponent {
     }
 
     previousPage() {
-        this.getNuggets(this.itemsPerPage, this.currentPage * this.itemsPerPage);
-        this.currentPage = this.currentPage - 1;
+        this.currentPage = this.currentPage == 1 ? 1 : this.currentPage - 1;
+        this.getNuggets();
     }
 
     nextPage() {
-        this.getNuggets(this.itemsPerPage, this.currentPage * this.itemsPerPage);
-        this.currentPage = this.currentPage + 1;
+        this.currentPage = this.currentPage == this.nbPage ? this.nbPage : this.currentPage + 1;
+        this.getNuggets();
     }
 
     update(id: string) {

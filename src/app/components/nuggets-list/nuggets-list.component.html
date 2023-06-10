@@ -1,4 +1,14 @@
 
+<div class="row mt-4">
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">Précédente</button>
+    </div>
+    <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">Suivante</button>
+    </div>
+</div>
+
 <div *ngIf="nuggets">
     <div class="card mt-4" *ngFor="let nugget of nuggets">
         <div class="card-header py-3">
@@ -7,15 +17,25 @@
                     <h4>{{nugget.title}}</h4>
                     {{nugget.createdAt}}
                 </div>
-                <div class="col-lg-4 " *ngIf="userId == nugget.userId">
-                    <button type="button" class="btn btn-primary" (click)="update(nugget.id)">Modifier</button>
-                    <button type="button" class="btn btn-danger" (click)="open(deleteModal, nugget.id)">Supprimer</button>
+                <div class="col-lg-4" *ngIf="userId == nugget.userId">
+                    <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal, nugget.id)">Supprimer</button>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <markdown lineNumbers>{{nugget.content}}</markdown>
         </div>
+    </div>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">Précédente</button>
+    </div>
+    <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">Suivante</button>
     </div>
 </div>
 

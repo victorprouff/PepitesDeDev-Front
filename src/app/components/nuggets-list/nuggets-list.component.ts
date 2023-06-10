@@ -13,6 +13,12 @@ export class NuggetsListComponent {
   userId: string = '';
   deleteNuggetId = '';
 
+  itemsPerPage = 2;
+
+  totalItemsPages = 0;
+  nbPage = 0;
+  currentPage = 1;
+
   constructor(
       private nuggetService: NuggetService,
       private redirect: RedirectService,
@@ -23,13 +29,26 @@ export class NuggetsListComponent {
   ngOnInit() {
     this.userId = this.authenticationService.userValue?.id || ''
 
-    this.getNuggets(3, 0);
+    this.getNuggets();
   }
 
-  getNuggets(limit: number, offset: number){
-    this.nuggetService.getList(limit, offset).subscribe(result => {
-      this.nuggets = result.nuggets;
-    })
+  getNuggets() {
+    this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
+        .subscribe(result => {
+          this.nuggets = result.nuggets;
+          this.totalItemsPages = result.nbOfNuggets
+          this.nbPage = this.getNbOfPage(this.totalItemsPages)
+        })
+  }
+
+  previousPage() {
+    this.currentPage = this.currentPage == 1 ? 1 : this.currentPage - 1;
+    this.getNuggets();
+  }
+
+  nextPage() {
+    this.currentPage = this.currentPage == this.nbPage ? this.nbPage : this.currentPage + 1;
+    this.getNuggets();
   }
 
   update(id: string) {
@@ -47,5 +66,9 @@ export class NuggetsListComponent {
     this.deleteNuggetId = nuggetId;
 
     this.modalService.open(content).result.then();
+  }
+
+  getNbOfPage(nbOfNuggets : number){
+    return Math.ceil(nbOfNuggets / this.itemsPerPage);
   }
 }
