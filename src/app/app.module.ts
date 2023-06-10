@@ -12,7 +12,6 @@ import { JwtInterceptor, ErrorInterceptor } from './helper';
 import { NuggetsListComponent } from './components/nuggets-list';
 import { NuggetComponent } from './components/nugget/nugget.component';
 import { LoginComponent } from './components/login';
-import { HomeComponent } from './components/home';
 import { AddNuggetComponent } from './components/add-nugget/add-nugget.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateNuggetComponent } from './components/update-nugget/update-nugget.component';
@@ -41,7 +40,6 @@ import {ClipboardButtonComponent, ClipboardOptions, MarkdownModule} from "ngx-ma
     NuggetsListComponent,
     NuggetComponent,
     LoginComponent,
-    HomeComponent,
     AddNuggetComponent,
     AddUserComponent,
     UpdateNuggetComponent,
