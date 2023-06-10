@@ -4,7 +4,7 @@
     <div class="col-lg-1">
         <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">Précédente</button>
     </div>
-    <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
+    <div class="col"></div>
     <div class="col-lg-1">
         <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">Suivante</button>
     </div>
@@ -18,9 +18,9 @@
                     <h4>{{nugget.title}}</h4>
                     {{nugget.createdAt | date:'d MMM yyyy - h:mm' }}
                 </div>
-                <div class="col-lg-4" *ngIf="userId == nugget.userId">
-                    <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">Modifier</button>
-                    <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal, nugget.id)">Supprimer</button>
+                <div class="col-lg-4 d-flex justify-content-end align-items-start" *ngIf="userId == nugget.userId">
+                    <button type="button" class="btn btn-outline-primary me-2" (click)="update(nugget.id)">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger me-2" (click)="open(deleteModal, nugget.id)">Supprimer</button>
                 </div>
             </div>
         </div>
