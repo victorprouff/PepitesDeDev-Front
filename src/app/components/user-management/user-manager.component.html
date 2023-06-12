@@ -8,11 +8,13 @@
     <li [ngbNavItem]="2">
         <button ngbNavLink><h4>Gestion de compte</h4></button>
         <ng-template ngbNavContent>
-            <h4>Mes information</h4>
+            <h4>Mes informations</h4>
             <ul>
                 <li>Mon email : {{user?.email}}</li>
+                <li>Mon username : {{user?.username}}</li>
             </ul>
             <app-update-email-user></app-update-email-user>
+            <app-update-username-user></app-update-username-user>
 
         </ng-template>
     </li>

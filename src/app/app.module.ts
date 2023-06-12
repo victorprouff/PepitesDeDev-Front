@@ -21,6 +21,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import { ListNuggetUserComponent } from './components/list-nugget-user/list-nugget-user.component';
 import { UpdateEmailUserComponent } from './components/update-email-user/update-email-user.component';
+import { UpdateUsernameUserComponent } from './components/update-username-user/update-username-user.component';
 
 @NgModule({
     imports: [
@@ -51,7 +52,8 @@ import { UpdateEmailUserComponent } from './components/update-email-user/update-
     UpdateNuggetComponent,
     UserManagerComponent,
     ListNuggetUserComponent,
-    UpdateEmailUserComponent
+    UpdateEmailUserComponent,
+    UpdateUsernameUserComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services";
 import {RedirectService} from "../../services/redirect.service";
-import {first} from "rxjs/operators";
 import {UserService} from "../../services/user.service";
+import {first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-update-email-user',
-  templateUrl: './update-email-user.component.html'
+  selector: 'app-update-username-user',
+  templateUrl: './update-username-user.component.html'
 })
-export class UpdateEmailUserComponent {
-  updateEmailForm!: FormGroup;
+export class UpdateUsernameUserComponent {
+  updateUsernameForm!: FormGroup;
   loading = false;
   submitted = false;
   error = '';
@@ -24,25 +24,25 @@ export class UpdateEmailUserComponent {
   }
 
   ngOnInit() {
-    this.updateEmailForm = this.formBuilder.group({
-      email: ['', Validators.required]
+    this.updateUsernameForm = this.formBuilder.group({
+      username: ['', Validators.required]
     });
   }
 
-  get f() { return this.updateEmailForm.controls; }
+  get f() { return this.updateUsernameForm.controls; }
 
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.updateEmailForm.invalid) {
+    if (this.updateUsernameForm.invalid) {
       return;
     }
 
     this.error = '';
     this.loading = true;
-    this.userService.updateEmail(this.f.email.value)
+    this.userService.updateUsername(this.f.username.value)
         .pipe(first())
         .subscribe({
           next: () => {

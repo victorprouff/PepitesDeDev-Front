@@ -21,4 +21,8 @@ export class UserService {
   updateEmail(email: string) {
     return this.http.put(`${environment.apiUrl}/user/email`, { email });
   }
+
+  updateUsername(username: string) {
+    return this.http.put(`${environment.apiUrl}/user/username`, { username });
+  }
 }
