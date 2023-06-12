@@ -3,11 +3,24 @@
         <h4 class="card-header py-3">Inscription</h4>
         <div class="card-body">
             <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">L'email est requis</div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">L'email est requis</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                <div *ngIf="f.username.errors.required">Le username est requis</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">

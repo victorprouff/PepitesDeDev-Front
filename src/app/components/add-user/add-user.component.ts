@@ -31,6 +31,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
     this.createUserForm = this.formBuilder.group({
       email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -47,7 +48,7 @@ export class AddUserComponent implements OnInit {
 
     this.error = '';
     this.loading = true;
-    this.userService.create(this.f.email.value, this.f.password.value)
+    this.userService.create(this.f.email.value, this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe({
           next: () => {

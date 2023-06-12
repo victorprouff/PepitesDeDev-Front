@@ -14,7 +14,7 @@ export class UserService {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
   }
 
-  create(email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}/user`, { email, password });
+  create(email: string, username: string, password: string) {
+    return this.http.post(`${environment.apiUrl}/user`, { email, username, password });
   }
 }
