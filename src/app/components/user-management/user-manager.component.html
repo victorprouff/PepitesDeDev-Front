@@ -13,9 +13,11 @@
                 <li>Mon email : {{user?.email}}</li>
                 <li>Mon username : {{user?.username}}</li>
             </ul>
-            <app-update-email-user></app-update-email-user>
-            <app-update-username-user></app-update-username-user>
-
+            <div class="row">
+                <div class="col"><app-update-email-user></app-update-email-user></div>
+                <div class="col"><app-update-username-user></app-update-username-user></div>
+                <div class="col"><app-update-password-user></app-update-password-user></div>
+            </div>
         </ng-template>
     </li>
 </ul>

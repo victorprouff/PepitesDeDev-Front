@@ -22,6 +22,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { ListNuggetUserComponent } from './components/list-nugget-user/list-nugget-user.component';
 import { UpdateEmailUserComponent } from './components/update-email-user/update-email-user.component';
 import { UpdateUsernameUserComponent } from './components/update-username-user/update-username-user.component';
+import { UpdatePasswordUserComponent } from './components/update-password-user/update-password-user.component';
 
 @NgModule({
     imports: [
@@ -53,7 +54,8 @@ import { UpdateUsernameUserComponent } from './components/update-username-user/u
     UserManagerComponent,
     ListNuggetUserComponent,
     UpdateEmailUserComponent,
-    UpdateUsernameUserComponent
+    UpdateUsernameUserComponent,
+    UpdatePasswordUserComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

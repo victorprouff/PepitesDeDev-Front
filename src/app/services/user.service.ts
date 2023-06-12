@@ -25,4 +25,8 @@ export class UserService {
   updateUsername(username: string) {
     return this.http.put(`${environment.apiUrl}/user/username`, { username });
   }
+
+  updatePassword(oldPassword: string, newPassword: string) {
+    return this.http.put(`${environment.apiUrl}/user/password`, { oldPassword, newPassword });
+  }
 }
