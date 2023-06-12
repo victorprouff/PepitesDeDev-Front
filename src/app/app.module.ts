@@ -19,6 +19,7 @@ import { UserManagerComponent } from './components/user-management/user-manager.
 import {ClipboardButtonComponent, ClipboardOptions, MarkdownModule} from "ngx-markdown";
 import {NgOptimizedImage} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
+import { ListNuggetUserComponent } from './components/list-nugget-user/list-nugget-user.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import {MatIconModule} from "@angular/material/icon";
     AddNuggetComponent,
     AddUserComponent,
     UpdateNuggetComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    ListNuggetUserComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

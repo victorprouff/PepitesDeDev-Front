@@ -1,0 +1,67 @@
+<div class="row mt-4">
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">
+            <mat-icon class="align-middle">arrow_back_ios</mat-icon>
+        </button>
+    </div>
+    <div class="col"></div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">
+            <mat-icon class="align-middle">arrow_forward_ios</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="nuggets">
+    <div class="card mt-4" *ngFor="let nugget of nuggets">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-lg-10">
+                    <h4><a class="nav-link" href="/nugget/{{nugget.id}}">{{nugget.title}}</a></h4>
+                    {{nugget.createdAt | date:'d MMM yyyy - h:mm' }}
+                </div>
+                <div class="col-sm-2 d-flex justify-content-end align-items-start btn-group" role="group" *ngIf="userId == nugget?.userId && nugget != undefined">
+                    <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">
+                        <mat-icon class="align-middle">edit_note</mat-icon>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal, nugget.id)">
+                        <mat-icon class="align-middle">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <markdown lineNumbers>{{nugget.content}}</markdown>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == 1" (click)="previousPage()">
+            <mat-icon class="align-middle">arrow_back_ios</mat-icon>
+        </button>
+    </div>
+    <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">
+            <mat-icon class="align-middle">arrow_forward_ios</mat-icon>
+        </button>
+    </div>
+</div>
+
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Suppression de la pépite</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        Etes-vous sur de vouloir supprimer cette pépite ?
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.dismiss('Cross click')">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="delete(); modal.close('Save click')">Supprimer</button>
+    </div>
+</ng-template>
