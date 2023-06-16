@@ -5,7 +5,13 @@
             <app-list-nugget-user></app-list-nugget-user>
         </ng-template>
     </li>
-    <li [ngbNavItem]="2">
+    <li [ngbNavItem]="2" *ngIf="userIsAdmin">
+        <button ngbNavLink><h4>Toutes les pépites</h4></button>
+        <ng-template ngbNavContent>
+            <app-nuggets-list></app-nuggets-list>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
         <button ngbNavLink><h4>Gestion de compte</h4></button>
         <ng-template ngbNavContent>
             <h4>Mes informations</h4>
