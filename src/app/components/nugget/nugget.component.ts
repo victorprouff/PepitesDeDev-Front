@@ -13,7 +13,7 @@ export class NuggetComponent {
   userId: string = '';
   userIsAdmin = false;
 
-  nugget?: Nugget;
+  nugget: Nugget | undefined;
   deleteNuggetId = '';
   itemsPerPage = 1;
 

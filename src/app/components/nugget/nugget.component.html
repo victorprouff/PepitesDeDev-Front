@@ -5,11 +5,12 @@
                 <h4><a class="nav-link" href="/nugget/{{nugget?.id}}">{{nugget?.title}}</a></h4>
                 {{nugget?.createdAt | date:'d MMM yyyy - h:mm' }}
             </div>
-            <div class="col-sm-2 d-flex justify-content-end align-items-start btn-group" role="group" *ngIf="userId == nugget?.userId && nugget != undefined">
-                <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">
+            <div class="col-sm-2 d-flex justify-content-end align-items-start btn-group" role="group"
+                 *ngIf="nugget != undefined && (userId == nugget?.userId || userIsAdmin)">
+                <button type="button" class="btn btn-outline-primary" (click)="update(nugget!.id)">
                     <mat-icon class="align-middle">edit_note</mat-icon>
                 </button>
-                <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal, nugget.id)">
+                <button type="button" class="btn btn-outline-danger"  (click)="open(deleteModal, nugget!.id)">
                     <mat-icon class="align-middle">delete</mat-icon>
                 </button>
             </div>
