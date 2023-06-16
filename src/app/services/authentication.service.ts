@@ -20,7 +20,7 @@ export class AuthenticationService {
     this.user = this.userSubject.asObservable();
   }
 
-  public get userValue() {
+  public get GetUserFromToken() {
     return this.userSubject.value;
   }
 
@@ -29,6 +29,9 @@ export class AuthenticationService {
         .pipe(map(user => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(user));
+          console.log(user);
+          console.log(JSON.stringify(user));
+
           this.userSubject.next(user);
           return user;
         }));

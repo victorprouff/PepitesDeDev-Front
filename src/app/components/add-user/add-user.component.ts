@@ -23,7 +23,7 @@ export class AddUserComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private userService: UserService
   ) {
-    if (this.authenticationService.userValue) {
+    if (this.authenticationService.GetUserFromToken) {
       this.redirect.toHome();
     }
   }

@@ -17,6 +17,8 @@ export class UpdateNuggetComponent {
   data? = '';
   error = '';
   id = '';
+  userIsAdmin = false;
+
   nugget?: Nugget;
 
   constructor(
@@ -29,6 +31,14 @@ export class UpdateNuggetComponent {
   }
 
 ngOnInit() {
+  this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
+
+  console.log(this.userIsAdmin)
+
+  if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
+    this.redirect.toHome();
+  }
+
   this.Activatedroute.paramMap.subscribe(paramMap => {
     this.id = paramMap.get('id') || '';
   });
@@ -36,10 +46,6 @@ ngOnInit() {
   this.nuggetService.get(this.id).subscribe(nugget => {
     this.nugget = nugget;
     this.data = this.nugget?.content;
-
-    if (this.authenticationService.userValue?.id != this.nugget?.userId) {
-      this.redirect.toHome();
-    }
   })
 
   this.updateNuggetForm = this.formBuilder.group({

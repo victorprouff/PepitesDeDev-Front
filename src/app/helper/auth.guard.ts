@@ -13,7 +13,7 @@ export class AuthGuard  {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const user = this.authenticationService.userValue;
+    const user = this.authenticationService.GetUserFromToken;
     if (user) {
       // logged in so return true
       return true;

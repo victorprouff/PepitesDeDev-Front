@@ -11,9 +11,10 @@ import {RedirectService} from "../../services/redirect.service";
 })
 export class NuggetComponent {
   userId: string = '';
+  userIsAdmin = false;
+
   nugget?: Nugget;
   deleteNuggetId = '';
-
   itemsPerPage = 1;
 
   totalItemsPages = 0;
@@ -30,7 +31,8 @@ export class NuggetComponent {
   }
 
   ngOnInit(): void {
-    this.userId = this.authenticationService.userValue?.id || ''
+    this.userId = this.authenticationService.GetUserFromToken?.id || ''
+    this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
     this.Activatedroute.paramMap.subscribe(paramMap => {
       const id = paramMap.get('id') || '';

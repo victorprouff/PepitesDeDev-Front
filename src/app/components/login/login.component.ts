@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
-    if (this.authenticationService.userValue) {
+    if (this.authenticationService.GetUserFromToken) {
       this.redirect.toHome();
     }
   }

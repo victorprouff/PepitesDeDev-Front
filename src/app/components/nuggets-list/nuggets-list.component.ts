@@ -14,6 +14,8 @@ export class NuggetsListComponent {
 
   nuggets: Nugget[] = [];
   userId: string = '';
+  userIsAdmin = false;
+
   deleteNuggetId = '';
   totalItemsPages = 0;
   nbPage = 0;
@@ -26,7 +28,8 @@ export class NuggetsListComponent {
   ) { }
 
   ngOnInit() {
-    this.userId = this.authenticationService.userValue?.id || ''
+    this.userId = this.authenticationService.GetUserFromToken?.id || ''
+    this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
     this.getNuggets();
   }

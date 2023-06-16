@@ -13,7 +13,7 @@ export class UserManagerComponent {
     constructor(
         private authenticationService: AuthenticationService,
     ) {
-        this.user = this.authenticationService.userValue;
+        this.user = this.authenticationService.GetUserFromToken;
     }
 
 }

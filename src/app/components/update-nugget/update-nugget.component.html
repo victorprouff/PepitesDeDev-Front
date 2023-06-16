@@ -1,6 +1,6 @@
 <div class="card mt-5">
     <div class="card-body">
-        <form [formGroup]="updateNuggetForm"  (ngSubmit)="onSubmit()">
+        <form [formGroup]="updateNuggetForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label class="form-label">Titre</label>
                 <input type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" value="{{nugget?.title}}">
