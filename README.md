@@ -1,4 +1,4 @@
-# PepiteDuCodeFront
+# Front du site [Pépites de Dev](https://pepites-de-dev.fr)
 
 ## Run with codespace
 

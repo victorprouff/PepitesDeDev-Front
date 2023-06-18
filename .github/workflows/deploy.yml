@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Deploy
 
 on:
   push:
@@ -31,4 +31,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: ./dist/pepite-du-code-front
+          local_dir: ./dist
