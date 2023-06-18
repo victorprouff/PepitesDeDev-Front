@@ -4,7 +4,7 @@
 
 export const environment = {
     production: true,
-    apiUrl: 'https://pepite-de-dev.cleverapps.io/api'
+    apiUrl: 'https://pepite-de-dev.fr/api'
 };
 
 /*
