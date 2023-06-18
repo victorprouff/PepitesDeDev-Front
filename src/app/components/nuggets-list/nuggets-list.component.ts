@@ -41,6 +41,9 @@ export class NuggetsListComponent {
           console.log(result.nuggets)
           this.totalItemsPages = result.nbOfNuggets
           this.nbPage = this.getNbOfPage(this.totalItemsPages)
+        },
+        error => {
+          console.log("error:", error)
         })
   }
 

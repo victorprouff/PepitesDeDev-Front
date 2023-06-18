@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:4000/api'
+    apiUrl: 'https://pepite-de-dev.cleverapps.io/api'
 };
