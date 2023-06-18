@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href https://pepites-de-dev.fr/",
+    "build:prod": "ng build --configuration production --base-href https://pepite-de-dev.cleverapps.io/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
