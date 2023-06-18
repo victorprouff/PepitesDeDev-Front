@@ -41,25 +41,28 @@ export class NuggetComponent {
   }
 
   getNugget(id: string){
-    this.nuggetService.get(id).subscribe(nugget => {
-      this.nugget = nugget;
-    });
+    this.nuggetService.get(id)
+      .subscribe(nugget => {
+        this.nugget = nugget;
+      },
+      error => {
+        this.redirect.toHome()
+      });
   }
 
   getNuggets() {
     this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
-        .subscribe(result => {
-          this.nugget = result.nuggets[0];
-          this.totalItemsPages = result.nbOfNuggets
-          this.nbPage = this.getNbOfPage(this.totalItemsPages)
-        })
+        .subscribe(
+            (result) => {
+              this.nugget = result.nuggets[0];
+              this.totalItemsPages = result.nbOfNuggets
+              this.nbPage = this.getNbOfPage(this.totalItemsPages)
+            });
   }
 
   delete() {
-    this.nuggetService.delete(this.deleteNuggetId).subscribe(_ =>
-    {
-      this.ngOnInit();
-    });
+    this.nuggetService.delete(this.deleteNuggetId)
+        .subscribe(_ => this.ngOnInit());
   }
 
   update(id: string) {

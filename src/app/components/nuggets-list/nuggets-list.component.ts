@@ -38,7 +38,7 @@ export class NuggetsListComponent {
     this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
         .subscribe(result => {
           this.nuggets = result.nuggets;
-          console.log(result.nuggets)
+
           this.totalItemsPages = result.nbOfNuggets
           this.nbPage = this.getNbOfPage(this.totalItemsPages)
         },

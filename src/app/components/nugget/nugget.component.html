@@ -29,7 +29,7 @@
     </div>
     <div class="col-lg-10 text-center align-middle">Pages : {{currentPage}} / {{nbPage}}</div>
     <div class="col-lg-1">
-        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage" (click)="nextPage()">
+        <button type="button" class="btn btn-outline-primary" [hidden]="currentPage == nbPage || nbPage == 1" (click)="nextPage()">
             <mat-icon class="align-middle">arrow_forward_ios</mat-icon>
         </button>
     </div>
