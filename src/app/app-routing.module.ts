@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
 @NgModule({
