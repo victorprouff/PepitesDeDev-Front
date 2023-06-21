@@ -43,19 +43,19 @@ import { UpdatePasswordUserComponent } from './components/update-password-user/u
         NgOptimizedImage,
         MatIconModule
     ],
-  declarations: [
-    AppComponent,
-    NuggetsListComponent,
-    NuggetComponent,
-    LoginComponent,
-    AddNuggetComponent,
-    AddUserComponent,
-    UpdateNuggetComponent,
-    UserManagerComponent,
-    ListNuggetUserComponent,
-    UpdateEmailUserComponent,
-    UpdateUsernameUserComponent,
-    UpdatePasswordUserComponent
+    declarations: [
+        AppComponent,
+        NuggetsListComponent,
+        NuggetComponent,
+        LoginComponent,
+        AddNuggetComponent,
+        AddUserComponent,
+        UpdateNuggetComponent,
+        UserManagerComponent,
+        ListNuggetUserComponent,
+        UpdateEmailUserComponent,
+        UpdateUsernameUserComponent,
+        UpdatePasswordUserComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
