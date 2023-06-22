@@ -23,7 +23,7 @@
                 <label class="form-label">Contenu</label>
                 <div class="row">
                     <div class="col-lg-6">
-                        <textarea rows="10" type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></textarea>
+                        <textarea rows="20" type="text" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></textarea>
                     </div>
                     <div class="col-lg-6">
                         <markdown lineNumbers [data]="f.content.value"></markdown>

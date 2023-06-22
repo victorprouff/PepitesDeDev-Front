@@ -14,6 +14,48 @@ export class AddNuggetComponent {
   loading = false;
   error = '';
 
+  content = '# Titre\n' +
+      '## Code\n' +
+      '```sql\n' +
+      'SELECT * FROM user WHERE user.id = 1;\n' +
+      '```\n' +
+      'Langages supportées :\n' +
+      '- csharp\n' +
+      '- css\n' +
+      '- powershell\n' +
+      '- bash\n' +
+      '- c\n' +
+      '- cpp\n' +
+      '- cshtml\n' +
+      '- scss\n' +
+      '- sass\n' +
+      '- python\n' +
+      '- rust\n' +
+      '- ruby\n' +
+      '- json\n' +
+      '- sql\n' +
+      '- javascript\n' +
+      '- java\n' +
+      '- docker\n' +
+      '\n' +
+      '*Ce texte est en italique.*\n' +
+      '_Celui-ci aussi._\n' +
+      '\n' +
+      '**Ce texte est en gras.**\n' +
+      '__Celui-là aussi.__\n' +
+      '\n' +
+      '***Ce texte a les deux styles.***\n' +
+      '**_Pareil ici_**\n' +
+      '*__Et là!__*\n' +
+      '\n' +
+      '*******\n' +
+      '\n' +
+      '## Liste\n' +
+      '- toto\n' +
+      '- tutu\n' +
+      '\n' +
+      '[Clic moi!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)';
+
   constructor(
       private formBuilder: FormBuilder,
       private redirect: RedirectService,
@@ -24,7 +66,7 @@ export class AddNuggetComponent {
   ngOnInit() {
     this.createNuggetForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required]
+      content: [this.content, Validators.required]
     });
   }
   protected readonly onsubmit = onsubmit;
