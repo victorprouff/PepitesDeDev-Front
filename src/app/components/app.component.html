@@ -2,9 +2,12 @@
   <div class="container">
     <ul class="navbar-nav justify-content-start">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active">PépitesDeDev();</a>
+        <a class="navbar-brand align-middle" href="#">
+          <img src="/favicon.ico" alt="" width="40" class="d-inline-block nav-link" routerLink="/" routerLinkActive="active">
+          PépitesDeDev();
+        </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item align-middle">
         <a class="nav-link" routerLink="/add-nugget" routerLinkActive="active" *ngIf="user">Ajouter une pépite !</a>
       </li>
     </ul>
