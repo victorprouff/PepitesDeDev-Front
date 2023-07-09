@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Nugget} from '../models';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {GetAllResponse} from "./models/nuggets/getAllResponse";
 
@@ -12,7 +12,7 @@ export class NuggetService {
     }
 
     create(title: string, content: string) {
-        return this.http.post(`${environment.apiUrl}/nugget`, {title, content});
+        return this.http.post<string>(`${environment.apiUrl}/nugget`, {title, content});
     }
 
     update(id: string, title: string, content: string) {
@@ -20,6 +20,21 @@ export class NuggetService {
             Title: title,
             Content: content
         });
+    }
+
+    uploadNuggetFile(files: any, nuggetId: string){
+        if (files.length === 0) {
+            return;
+        }
+
+        let fileToUpload = <File>files[0];
+        const formData = new FormData();
+        formData.append('file', fileToUpload, fileToUpload.name);
+
+        this.http.post(`${environment.apiUrl}/file/nugget/${nuggetId}`, formData)
+            .subscribe({
+                error: (err: HttpErrorResponse) => console.log(err)
+            });
     }
 
     delete(id: string) {

@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NuggetService } from "../../services";
 import { first } from "rxjs/operators";
 import {RedirectService} from "../../services/redirect.service";
-import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
-import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-add-nugget',
@@ -65,7 +63,6 @@ export class AddNuggetComponent {
       private formBuilder: FormBuilder,
       private redirect: RedirectService,
       private nuggetService: NuggetService,
-      private fileService: FileService
   ) {
   }
 
@@ -92,11 +89,9 @@ export class AddNuggetComponent {
     this.nuggetService.create(this.f.title.value, this.f.content.value)
         .pipe(first())
         .subscribe({
-          next:() => {
-            console.log("next")
+          next:(nuggetId) => {
             if (this.file.name !== "") {
-              console.log("if")
-              this.fileService.uploadFile(this.file);
+              this.nuggetService.uploadNuggetFile(this.file, nuggetId);
             }
 
             this.redirect.toHome();
@@ -109,12 +104,10 @@ export class AddNuggetComponent {
   }
 
   uploadFile = (file: any) => {
-    console.log("uploadFile")
     if (file.length === 0) {
       return;
     }
 
     this.file = file;
-    console.log(this.file)
   }
 }
