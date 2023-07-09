@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NuggetService } from "../../services";
 import { first } from "rxjs/operators";
 import {RedirectService} from "../../services/redirect.service";
+import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
+import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-add-nugget',
@@ -13,6 +15,7 @@ export class AddNuggetComponent {
   submitted = false;
   loading = false;
   error = '';
+  file: File =  new File([], "");
 
   content = '# Titre\n' +
       '## Code\n' +
@@ -56,10 +59,13 @@ export class AddNuggetComponent {
       '\n' +
       '[Clic moi!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)';
 
+  @Output() public onUploadFinished = new EventEmitter();
+
   constructor(
       private formBuilder: FormBuilder,
       private redirect: RedirectService,
-      private nuggetService: NuggetService
+      private nuggetService: NuggetService,
+      private fileService: FileService
   ) {
   }
 
@@ -87,6 +93,12 @@ export class AddNuggetComponent {
         .pipe(first())
         .subscribe({
           next:() => {
+            console.log("next")
+            if (this.file.name !== "") {
+              console.log("if")
+              this.fileService.uploadFile(this.file);
+            }
+
             this.redirect.toHome();
           },
           error: error => {
@@ -94,5 +106,15 @@ export class AddNuggetComponent {
             this.loading = false;
           }
         });
+  }
+
+  uploadFile = (file: any) => {
+    console.log("uploadFile")
+    if (file.length === 0) {
+      return;
+    }
+
+    this.file = file;
+    console.log(this.file)
   }
 }
