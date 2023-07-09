@@ -42,7 +42,6 @@ export class UpdateNuggetComponent {
             this.data = this.nugget?.content;
 
             if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
-                console.log("toto")
                 this.redirect.toHome();
             }
         })

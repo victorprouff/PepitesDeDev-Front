@@ -48,10 +48,8 @@ export class AddUserComponent implements OnInit {
         console.log("Form invalid")
         return;
     }
-
-    console.log("Form valid")
-
-      this.error = '';
+    
+    this.error = '';
     this.loading = true;
     this.userService.create(this.f.email.value, this.f.username.value, this.f.password.value)
         .pipe(first())
