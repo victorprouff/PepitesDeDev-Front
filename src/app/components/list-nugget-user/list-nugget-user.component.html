@@ -31,6 +31,7 @@
             </div>
         </div>
         <div class="card-body">
+            <img *ngIf="nugget.urlImage != null" src="{{nugget.urlImage}}" alt="" width="500" height="600" class="rounded mx-auto d-block">
             <markdown lineNumbers>{{nugget.content}}</markdown>
         </div>
     </div>
