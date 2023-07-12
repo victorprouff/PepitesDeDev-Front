@@ -3,6 +3,7 @@ interface Nugget {
     userId: string;
     title: string;
     content: string;
+    urlImage: string;
     creator: string;
     createdAt: Date;
 }

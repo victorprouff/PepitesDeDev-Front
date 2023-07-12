@@ -31,7 +31,7 @@ export class NuggetService {
         const formData = new FormData();
         formData.append('file', fileToUpload, fileToUpload.name);
 
-        this.http.post(`${environment.apiUrl}/file/nugget/${nuggetId}`, formData)
+        this.http.put(`${environment.apiUrl}/nugget/${nuggetId}/image`, formData)
             .subscribe({
                 error: (err: HttpErrorResponse) => console.log(err)
             });
