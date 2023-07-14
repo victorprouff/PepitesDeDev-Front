@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {AuthenticationService} from "../services";
 import {User} from "../models";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
 export class AppComponent {
-  user?: User | null;
+    authenticationService = inject(AuthenticationService)
 
-  constructor(private authenticationService: AuthenticationService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
-  }
+    user?: User | null;
 
-  logout() {
-    this.authenticationService.logout();
-  }
+    constructor() {
+        this.authenticationService.user.subscribe(x => this.user = x);
+    }
+
+    logout() {
+        this.authenticationService.logout();
+    }
 }

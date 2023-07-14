@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, inject} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {AuthenticationService, NuggetService} from "../../services";
 import {first} from "rxjs/operators";
@@ -11,6 +11,12 @@ import {RedirectService} from "../../services/redirect.service";
     templateUrl: './update-nugget.component.html'
 })
 export class UpdateNuggetComponent {
+    formBuilder = inject(FormBuilder)
+    Activatedroute = inject(ActivatedRoute)
+    redirect = inject(RedirectService)
+    nuggetService = inject(NuggetService)
+    authenticationService = inject(AuthenticationService)
+
     updateNuggetForm!: FormGroup;
     submitted = false;
     loading = false;
@@ -21,15 +27,6 @@ export class UpdateNuggetComponent {
 
     nugget?: Nugget;
     file: File =  new File([], "");
-
-    constructor(
-        private formBuilder: FormBuilder,
-        private Activatedroute: ActivatedRoute,
-        private redirect: RedirectService,
-        private nuggetService: NuggetService,
-        private authenticationService: AuthenticationService
-    ) {
-    }
 
     ngOnInit() {
         this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Nugget} from '../models';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
@@ -8,8 +8,7 @@ import {GetAllResponse} from "./models/nuggets/getAllResponse";
     providedIn: 'root'
 })
 export class NuggetService {
-    constructor(private http: HttpClient) {
-    }
+    http = inject(HttpClient)
 
     create(title: string, content: string, files: any | undefined) {
         let formData = new FormData()
@@ -33,7 +32,7 @@ export class NuggetService {
 
         if (files != undefined && files.length !== 0) {
             let fileToUpload = <File>files[0];
-            if(fileToUpload != undefined){
+            if (fileToUpload != undefined) {
                 formData.append('file', fileToUpload, fileToUpload.name);
             }
         }
@@ -48,6 +47,7 @@ export class NuggetService {
     deleteImage(id: string) {
         return this.http.delete(`${environment.apiUrl}/nugget/${id}/image`);
     }
+
     get(id: string) {
         return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
     }

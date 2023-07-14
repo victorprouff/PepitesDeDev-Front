@@ -1,109 +1,109 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NuggetService } from "../../services";
-import { first } from "rxjs/operators";
+import {Component, EventEmitter, inject, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NuggetService} from "../../services";
+import {first} from "rxjs/operators";
 import {RedirectService} from "../../services/redirect.service";
 
 @Component({
-  selector: 'app-add-nugget',
-  templateUrl: './add-nugget.component.html'
+    selector: 'app-add-nugget',
+    templateUrl: './add-nugget.component.html'
 })
 export class AddNuggetComponent {
-  createNuggetForm!: FormGroup;
-  submitted = false;
-  loading = false;
-  error = '';
-  file: File =  new File([], "");
+    nuggetService = inject(NuggetService)
+    formBuilder = inject(FormBuilder)
+    redirect = inject(RedirectService)
 
-  content = '# Titre\n' +
-      '## Code\n' +
-      '```sql\n' +
-      'SELECT * FROM user WHERE user.id = 1;\n' +
-      '```\n' +
-      'Langages supportées :\n' +
-      '- csharp\n' +
-      '- css\n' +
-      '- powershell\n' +
-      '- bash\n' +
-      '- c\n' +
-      '- cpp\n' +
-      '- cshtml\n' +
-      '- scss\n' +
-      '- sass\n' +
-      '- python\n' +
-      '- rust\n' +
-      '- ruby\n' +
-      '- json\n' +
-      '- sql\n' +
-      '- javascript\n' +
-      '- java\n' +
-      '- docker\n' +
-      '\n' +
-      '*Ce texte est en italique.*\n' +
-      '_Celui-ci aussi._\n' +
-      '\n' +
-      '**Ce texte est en gras.**\n' +
-      '__Celui-là aussi.__\n' +
-      '\n' +
-      '***Ce texte a les deux styles.***\n' +
-      '**_Pareil ici_**\n' +
-      '*__Et là!__*\n' +
-      '\n' +
-      '*******\n' +
-      '\n' +
-      '## Liste\n' +
-      '- toto\n' +
-      '- tutu\n' +
-      '\n' +
-      '[Clic moi!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)';
+    createNuggetForm!: FormGroup;
+    submitted = false;
+    loading = false;
+    error = '';
+    file: File = new File([], "");
 
-  @Output() public onUploadFinished = new EventEmitter();
+    content = '# Titre\n' +
+        '## Code\n' +
+        '```sql\n' +
+        'SELECT * FROM user WHERE user.id = 1;\n' +
+        '```\n' +
+        'Langages supportées :\n' +
+        '- csharp\n' +
+        '- css\n' +
+        '- powershell\n' +
+        '- bash\n' +
+        '- c\n' +
+        '- cpp\n' +
+        '- cshtml\n' +
+        '- scss\n' +
+        '- sass\n' +
+        '- python\n' +
+        '- rust\n' +
+        '- ruby\n' +
+        '- json\n' +
+        '- sql\n' +
+        '- javascript\n' +
+        '- java\n' +
+        '- docker\n' +
+        '\n' +
+        '*Ce texte est en italique.*\n' +
+        '_Celui-ci aussi._\n' +
+        '\n' +
+        '**Ce texte est en gras.**\n' +
+        '__Celui-là aussi.__\n' +
+        '\n' +
+        '***Ce texte a les deux styles.***\n' +
+        '**_Pareil ici_**\n' +
+        '*__Et là!__*\n' +
+        '\n' +
+        '*******\n' +
+        '\n' +
+        '## Liste\n' +
+        '- toto\n' +
+        '- tutu\n' +
+        '\n' +
+        '[Clic moi!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)';
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private redirect: RedirectService,
-      private nuggetService: NuggetService,
-  ) {
-  }
+    @Output() public onUploadFinished = new EventEmitter();
 
-  ngOnInit() {
-    this.createNuggetForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      content: [this.content, Validators.required]
-    });
-  }
-  protected readonly onsubmit = onsubmit;
-
-  get f() { return this.createNuggetForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.createNuggetForm.invalid) {
-      return;
-    }
-
-    this.error = '';
-    this.loading = true;
-
-    this.nuggetService.create(this.f.title.value, this.f.content.value, this.file)
-        .pipe(first())
-        .subscribe({
-          next:(nuggetId) => {
-            this.redirect.toHome();
-          },
-          error: error => {
-            this.error = error;
-            this.loading = false;
-          }
+    ngOnInit() {
+        this.createNuggetForm = this.formBuilder.group({
+            title: ['', Validators.required],
+            content: [this.content, Validators.required]
         });
-  }
-
-  uploadFile = (file: any) => {
-    if (file.length === 0) {
-      return;
     }
 
-    this.file = file;
-  }
+    protected readonly onsubmit = onsubmit;
+
+    get f() {
+        return this.createNuggetForm.controls;
+    }
+
+    onSubmit() {
+        this.submitted = true;
+
+        if (this.createNuggetForm.invalid) {
+            return;
+        }
+
+        this.error = '';
+        this.loading = true;
+
+        this.nuggetService.create(this.f.title.value, this.f.content.value, this.file)
+            .pipe(first())
+            .subscribe({
+                next: (nuggetId) => {
+                    this.redirect.toHome();
+                },
+                error: error => {
+                    this.error = error;
+                    this.loading = false;
+                }
+            });
+    }
+
+    uploadFile = (file: any) => {
+        if (file.length === 0) {
+            return;
+        }
+
+        this.file = file;
+    }
 }

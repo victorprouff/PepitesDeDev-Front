@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Nugget } from "../../models";
 import { AuthenticationService, NuggetService } from "../../services";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -9,6 +9,11 @@ import { RedirectService } from "../../services/redirect.service";
   templateUrl: './nuggets-list.component.html'
 })
 export class NuggetsListComponent {
+  nuggetService = inject(NuggetService)
+  redirect = inject(RedirectService)
+  authenticationService = inject(AuthenticationService)
+  modalService = inject(NgbModal)
+
   itemsPerPage = 5;
   currentPage = 1;
 
@@ -19,13 +24,6 @@ export class NuggetsListComponent {
   deleteNuggetId = '';
   totalItemsPages = 0;
   nbPage = 0;
-
-  constructor(
-      private nuggetService: NuggetService,
-      private redirect: RedirectService,
-      private authenticationService: AuthenticationService,
-      private modalService: NgbModal
-  ) { }
 
   ngOnInit() {
     this.userId = this.authenticationService.GetUserFromToken?.id || ''
