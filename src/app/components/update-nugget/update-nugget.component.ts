@@ -38,19 +38,22 @@ export class UpdateNuggetComponent {
             this.id = paramMap.get('id') || '';
         });
 
+        this.updateNuggetForm = this.formBuilder.group({
+            title: [''],
+            content: ['']
+        });
+
         this.nuggetService.get(this.id).subscribe(nugget => {
             this.nugget = nugget;
             this.data = this.nugget?.content;
+
+            this.updateNuggetForm.get('title')!.setValue(this.nugget.title)
+            this.updateNuggetForm.get('content')!.setValue(this.nugget.content)
 
             if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
                 this.redirect.toHome();
             }
         })
-
-        this.updateNuggetForm = this.formBuilder.group({
-            title: [this.nugget?.title, [Validators.minLength(5)]],
-            content: [this.nugget?.content, [Validators.minLength(5)]]
-        });
     }
 
     get f() {
