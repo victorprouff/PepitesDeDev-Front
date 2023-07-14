@@ -1,19 +1,22 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services";
 import {RedirectService} from "../../services/redirect.service";
 import {UserService} from "../../services/user.service";
 import {first} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-update-username-user',
     templateUrl: './update-username-user.component.html'
 })
-export class UpdateUsernameUserComponent {
+export class UpdateUsernameUserComponent implements OnDestroy {
     formBuilder = inject(FormBuilder)
     authenticationService = inject(AuthenticationService)
     redirect = inject(RedirectService)
     userService = inject(UserService)
+
+    subscriptions: Subscription[] = []
 
     updateUsernameForm!: FormGroup;
     loading = false;
@@ -30,7 +33,6 @@ export class UpdateUsernameUserComponent {
         return this.updateUsernameForm.controls;
     }
 
-
     onSubmit() {
         this.submitted = true;
 
@@ -41,7 +43,7 @@ export class UpdateUsernameUserComponent {
 
         this.error = '';
         this.loading = true;
-        this.userService.updateUsername(this.f.username.value)
+        const subscription = this.userService.updateUsername(this.f.username.value)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -52,5 +54,11 @@ export class UpdateUsernameUserComponent {
                     this.loading = false;
                 }
             });
+
+        this.subscriptions.push(subscription)
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
     }
 }

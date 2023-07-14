@@ -1,14 +1,17 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from "../../services";
 import {RedirectService} from "../../services/redirect.service";
+import {Subscription} from "rxjs";
 
 @Component({templateUrl: 'login.component.html'})
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
     formBuilder = inject(FormBuilder)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
+
+    subscriptions: Subscription[] = []
 
     loginForm!: FormGroup;
     loading = false;
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit {
 
         this.error = '';
         this.loading = true;
-        this.authenticationService.login(this.f.emailOrUsername.value, this.f.password.value)
+        const subscription = this.authenticationService.login(this.f.emailOrUsername.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -55,5 +58,9 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 }
             });
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
     }
 }

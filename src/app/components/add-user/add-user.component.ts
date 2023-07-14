@@ -1,19 +1,22 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {AuthenticationService} from "../../services";
 import {UserService} from "../../services/user.service";
 import {RedirectService} from "../../services/redirect.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-add-user',
     templateUrl: './add-user.component.html'
 })
-export class AddUserComponent implements OnInit {
+export class AddUserComponent implements OnInit, OnDestroy {
     formBuilder = inject(FormBuilder)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
     userService = inject(UserService)
+
+    subscriptions: Subscription[] = []
 
     createUserForm!: FormGroup;
     loading = false;
@@ -51,7 +54,7 @@ export class AddUserComponent implements OnInit {
 
         this.error = '';
         this.loading = true;
-        this.userService.create(this.f.email.value, this.f.username.value, this.f.password.value)
+        const subscription = this.userService.create(this.f.email.value, this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -62,5 +65,11 @@ export class AddUserComponent implements OnInit {
                     this.loading = false;
                 }
             });
+
+        this.subscriptions.push(subscription)
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
     }
 }

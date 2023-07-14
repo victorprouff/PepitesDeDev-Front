@@ -1,19 +1,22 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services";
 import {RedirectService} from "../../services/redirect.service";
 import {first} from "rxjs/operators";
 import {UserService} from "../../services/user.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-update-email-user',
     templateUrl: './update-email-user.component.html'
 })
-export class UpdateEmailUserComponent {
+export class UpdateEmailUserComponent implements OnDestroy {
     formBuilder = inject(FormBuilder)
     authenticationService = inject(AuthenticationService)
     redirect = inject(RedirectService)
     userService = inject(UserService)
+
+    subscriptions: Subscription[] = []
 
     updateEmailForm!: FormGroup;
     loading = false;
@@ -41,7 +44,7 @@ export class UpdateEmailUserComponent {
 
         this.error = '';
         this.loading = true;
-        this.userService.updateEmail(this.f.email.value)
+        const subscription = this.userService.updateEmail(this.f.email.value)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -52,5 +55,11 @@ export class UpdateEmailUserComponent {
                     this.loading = false;
                 }
             });
+
+        this.subscriptions.push(subscription)
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
     }
 }
