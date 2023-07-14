@@ -20,6 +20,7 @@ export class UpdateNuggetComponent {
     userIsAdmin = false;
 
     nugget?: Nugget;
+    file: File =  new File([], "");
 
     constructor(
         private formBuilder: FormBuilder,
@@ -41,6 +42,7 @@ export class UpdateNuggetComponent {
             this.nugget = nugget;
             this.data = this.nugget?.content;
 
+            console.log(this.nugget)
             if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
                 this.redirect.toHome();
             }
@@ -68,7 +70,9 @@ export class UpdateNuggetComponent {
         this.error = '';
         this.loading = true;
 
-        this.nuggetService.update(this.id, this.f.title.value, this.f.content.value)
+        console.log("update f", this.f)
+        console.log("update nugget", this.nugget)
+        this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.file)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -79,5 +83,24 @@ export class UpdateNuggetComponent {
                     this.loading = false;
                 }
             });
+    }
+
+    uploadImage = (file: any) => {
+        if (file.length === 0) {
+            return;
+        }
+
+        this.file = file;
+    }
+
+    deleteImage = () => {
+        this.nuggetService.deleteImage(this.id).subscribe({
+            next: () => {
+                if(this.nugget != null)
+                {
+                    this.nugget!.urlImage = null
+                }
+            }
+        })
     }
 }

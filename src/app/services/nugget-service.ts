@@ -13,6 +13,7 @@ export class NuggetService {
 
     create(title: string, content: string, files: any | undefined) {
         let formData = new FormData()
+
         formData.append('Title', title);
         formData.append('Content', content);
 
@@ -24,17 +25,30 @@ export class NuggetService {
         return this.http.post<string>(`${environment.apiUrl}/nugget`, formData);
     }
 
-    update(id: string, title: string, content: string) {
-        return this.http.put(`${environment.apiUrl}/nugget/${id}`, {
-            Title: title,
-            Content: content
-        });
+    update(id: string, title: string, content: string, files: any | undefined) {
+        let formData = new FormData()
+        formData.append('Id', id);
+        formData.append('Title', title);
+        formData.append('Content', content);
+
+        console.log(files)
+        if (files != undefined && files.length !== 0) {
+            let fileToUpload = <File>files[0];
+            if(fileToUpload != undefined){
+                formData.append('file', fileToUpload, fileToUpload.name);
+            }
+        }
+
+        return this.http.put(`${environment.apiUrl}/nugget/${id}`, formData);
     }
 
     delete(id: string) {
         return this.http.delete(`${environment.apiUrl}/nugget/${id}`);
     }
 
+    deleteImage(id: string) {
+        return this.http.delete(`${environment.apiUrl}/nugget/${id}/image`);
+    }
     get(id: string) {
         return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
     }
