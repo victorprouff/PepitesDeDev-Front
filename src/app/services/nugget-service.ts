@@ -31,7 +31,6 @@ export class NuggetService {
         formData.append('Title', title);
         formData.append('Content', content);
 
-        console.log(files)
         if (files != undefined && files.length !== 0) {
             let fileToUpload = <File>files[0];
             if(fileToUpload != undefined){

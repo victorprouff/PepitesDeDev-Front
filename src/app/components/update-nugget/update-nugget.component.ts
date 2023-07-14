@@ -42,7 +42,6 @@ export class UpdateNuggetComponent {
             this.nugget = nugget;
             this.data = this.nugget?.content;
 
-            console.log(this.nugget)
             if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
                 this.redirect.toHome();
             }
@@ -53,8 +52,6 @@ export class UpdateNuggetComponent {
             content: [this.nugget?.content, [Validators.minLength(5)]]
         });
     }
-
-    protected readonly onsubmit = onsubmit;
 
     get f() {
         return this.updateNuggetForm.controls;
@@ -70,8 +67,6 @@ export class UpdateNuggetComponent {
         this.error = '';
         this.loading = true;
 
-        console.log("update f", this.f)
-        console.log("update nugget", this.nugget)
         this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.file)
             .pipe(first())
             .subscribe({
@@ -98,6 +93,7 @@ export class UpdateNuggetComponent {
             next: () => {
                 if(this.nugget != null)
                 {
+                    console.log('nugget after delete url', this.nugget)
                     this.nugget!.urlImage = null
                 }
             }
