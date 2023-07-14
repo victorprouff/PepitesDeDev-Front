@@ -86,14 +86,10 @@ export class AddNuggetComponent {
     this.error = '';
     this.loading = true;
 
-    this.nuggetService.create(this.f.title.value, this.f.content.value)
+    this.nuggetService.create(this.f.title.value, this.f.content.value, this.file)
         .pipe(first())
         .subscribe({
           next:(nuggetId) => {
-            if (this.file.name !== "") {
-              this.nuggetService.uploadNuggetFile(this.file, nuggetId);
-            }
-
             this.redirect.toHome();
           },
           error: error => {

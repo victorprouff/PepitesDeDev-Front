@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Nugget} from '../models';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {GetAllResponse} from "./models/nuggets/getAllResponse";
 
@@ -11,8 +11,17 @@ export class NuggetService {
     constructor(private http: HttpClient) {
     }
 
-    create(title: string, content: string) {
-        return this.http.post<string>(`${environment.apiUrl}/nugget`, {title, content});
+    create(title: string, content: string, files: any | undefined) {
+        let formData = new FormData()
+        formData.append('Title', title);
+        formData.append('Content', content);
+
+        if (files != undefined && files.length !== 0) {
+            let fileToUpload = <File>files[0];
+            formData.append('file', fileToUpload, fileToUpload.name);
+        }
+
+        return this.http.post<string>(`${environment.apiUrl}/nugget`, formData);
     }
 
     update(id: string, title: string, content: string) {
@@ -20,21 +29,6 @@ export class NuggetService {
             Title: title,
             Content: content
         });
-    }
-
-    uploadNuggetFile(files: any, nuggetId: string){
-        if (files.length === 0) {
-            return;
-        }
-
-        let fileToUpload = <File>files[0];
-        const formData = new FormData();
-        formData.append('file', fileToUpload, fileToUpload.name);
-
-        this.http.put(`${environment.apiUrl}/nugget/${nuggetId}/image`, formData)
-            .subscribe({
-                error: (err: HttpErrorResponse) => console.log(err)
-            });
     }
 
     delete(id: string) {
