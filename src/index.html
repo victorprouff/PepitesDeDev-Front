@@ -10,7 +10,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="mat-typography">
-  <app-root></app-root>
+<body class="mat-typography d-flex flex-column h-100">
+  <main class="flex-shrink-0">
+    <app-root></app-root>
+  </main>
+  <footer class="footer mt-auto py-3 bg-dark">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col">
+          <a href="https://github.com/victorprouff/PepitesDeDev-Front">
+            <img src="./assets/icons/github.svg" alt="">
+          </a>
+          <a href="mailto:contact@victorprouff.fr">
+            <img src="./assets/icons/mail-142.svg" alt="">
+          </a>
+        </div>
+
+      </div>
+      <div class="row py-2">
+        <span class="text-light text-center">2023 © Victor Prouff. Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
