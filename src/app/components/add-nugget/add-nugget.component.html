@@ -33,20 +33,18 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
-                    <button type="button" class="btn btn-success" (click)="file.click()">Ajouter un fichier</button>
-                </div>
-                <div class="col-sm-8"></div>
-                <div class="col-sm-2">
-                    <button [disabled]="loading" class="btn btn-primary">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Créer
-                    </button>
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-                </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Choisir une image...</label>
+                <input class="form-control" #file type="file" id="formFile" (click)="file.click()" (change)="uploadFile(file.files)">
             </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Créer
+                </button>
+            </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>
     </div>
 </div>

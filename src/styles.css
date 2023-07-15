@@ -11,3 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 70px;
     margin-bottom: 30px;
 }
+
+.display-file-input {
+    display:none;
+}

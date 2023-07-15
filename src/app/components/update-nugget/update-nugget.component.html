@@ -9,9 +9,17 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label">Image</label>
-                <img *ngIf="nugget != undefined && nugget!.urlImage != null" src="{{nugget!.urlImage}}" alt="" class="rounded mx-auto d-block img-size">
-                <label class="form-label">Contenu</label>
+                <div class="row mt-4 mb-2">
+                    <div class="col-lg-2 justify-content-md-start">
+                        <button type="button" class="btn btn-outline-warning" (click)="deleteImage()">Supprimer l'image</button>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-lg-4 justify-content-md-end">
+                        <input class="form-control" #file type="file" id="formFile" (click)="file.click()" (change)="uploadImage(file.files)">
+                    </div>
+                </div>
+
+                <img *ngIf="nugget != undefined && nugget!.urlImage != null" src="{{nugget!.urlImage}}" alt="" class="rounded mx-auto d-block img-size mb-4">
                 <div class="row">
                     <div class="col-lg-6">
                         <textarea type="text" rows="10" class="form-control" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }" value="{{nugget?.content}}"></textarea>
@@ -25,21 +33,13 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-4 d-flex justify-content-end align-items-start btn-group" role="group">
-                    <button type="button" class="btn btn-warning" (click)="deleteImage()">Supprimer l'image</button>
-                    <input type="file" #file placeholder="Choose file" (change)="uploadImage(file.files)" style="display:none;">
-                    <button type="button" class="btn btn-success" (click)="file.click()">Ajouter ou remplacer une image</button>
-                </div>
-                <div class="col-sm-6"></div>
-                <div class="col-sm-2">
-                    <button [disabled]="loading" class="btn btn-primary">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Modifier
-                    </button>
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-                </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Modifier
+                </button>
             </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
 
         </form>
     </div>
