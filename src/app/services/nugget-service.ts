@@ -16,10 +16,7 @@ export class NuggetService {
         formData.append('Title', title);
         formData.append('Content', content);
 
-        if (files != undefined && files.length !== 0) {
-            let fileToUpload = <File>files[0];
-            formData.append('file', fileToUpload, fileToUpload.name);
-        }
+        formData = this.appendFileData(formData, files);
 
         return this.http.post<string>(`${environment.apiUrl}/nugget`, formData);
     }
@@ -30,14 +27,18 @@ export class NuggetService {
         formData.append('Title', title);
         formData.append('Content', content);
 
-        if (files != undefined && files.length !== 0) {
-            let fileToUpload = <File>files[0];
-            if (fileToUpload != undefined) {
-                formData.append('file', fileToUpload, fileToUpload.name);
-            }
-        }
+        formData = this.appendFileData(formData, files);
 
         return this.http.put(`${environment.apiUrl}/nugget/${id}`, formData);
+    }
+
+    private appendFileData(formData: FormData, files: any | undefined){
+        if (files != undefined && files.length > 0) {
+            const fileToUpload = <File>files[0];
+            formData.append('File', fileToUpload, fileToUpload.name);
+        }
+
+        return formData;
     }
 
     delete(id: string) {

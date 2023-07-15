@@ -101,7 +101,6 @@ export class UpdateNuggetComponent implements OnDestroy {
             next: () => {
                 if(this.nugget != null)
                 {
-                    console.log('nugget after delete url', this.nugget)
                     this.nugget!.urlImage = null
                 }
             }

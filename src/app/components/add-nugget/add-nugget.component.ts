@@ -20,7 +20,7 @@ export class AddNuggetComponent implements OnDestroy {
     submitted = false;
     loading = false;
     error = '';
-    file: File = new File([], "");
+    file: File | undefined;
 
     content = this.getContent()
 
