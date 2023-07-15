@@ -1,19 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {AuthenticationService} from "../services";
 import {User} from "../models";
+import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
-export class AppComponent {
-  user?: User | null;
+export class AppComponent implements OnDestroy {
+    authenticationService = inject(AuthenticationService)
 
-  constructor(private authenticationService: AuthenticationService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
-  }
+    subscriptions: Subscription[] = []
 
-  logout() {
-    this.authenticationService.logout();
-  }
+    user?: User | null;
+
+    constructor() {
+        const subscription = this.authenticationService.user.subscribe(x => this.user = x);
+
+        this.subscriptions.push(subscription)
+    }
+
+    logout() {
+        this.authenticationService.logout();
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+    }
 }

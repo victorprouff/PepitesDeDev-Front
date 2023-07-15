@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {environment} from "../environments/environment";
 import {User} from "../models";
 import {HttpClient} from "@angular/common/http";
@@ -7,8 +7,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  http = inject(HttpClient)
 
   getUser(id: string ) {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`);

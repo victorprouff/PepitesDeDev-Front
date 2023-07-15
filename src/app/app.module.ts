@@ -1,28 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './components/app.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { JwtInterceptor, ErrorInterceptor } from './helper';
+import {JwtInterceptor, ErrorInterceptor} from './helper';
 
-import { NuggetsListComponent } from './components/nuggets-list';
-import { NuggetComponent } from './components/nugget/nugget.component';
-import { LoginComponent } from './components/login';
-import { AddNuggetComponent } from './components/add-nugget/add-nugget.component';
-import { AddUserComponent } from './components/add-user/add-user.component';
-import { UpdateNuggetComponent } from './components/update-nugget/update-nugget.component';
-import { UserManagerComponent } from './components/user-management/user-manager.component';
+import {NuggetsListComponent} from './components/nuggets-list';
+import {NuggetComponent} from './components/nugget/nugget.component';
+import {LoginComponent} from './components/login';
+import {AddNuggetComponent} from './components/add-nugget/add-nugget.component';
+import {AddUserComponent} from './components/add-user/add-user.component';
+import {UpdateNuggetComponent} from './components/update-nugget/update-nugget.component';
+import {UserManagerComponent} from './components/user-management/user-manager.component';
 import {ClipboardButtonComponent, ClipboardOptions, MarkdownModule} from "ngx-markdown";
 import {NgOptimizedImage} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
-import { ListNuggetUserComponent } from './components/list-nugget-user/list-nugget-user.component';
-import { UpdateEmailUserComponent } from './components/update-email-user/update-email-user.component';
-import { UpdateUsernameUserComponent } from './components/update-username-user/update-username-user.component';
-import { UpdatePasswordUserComponent } from './components/update-password-user/update-password-user.component';
+import {ListNuggetUserComponent} from './components/list-nugget-user/list-nugget-user.component';
+import {UpdateEmailUserComponent} from './components/update-email-user/update-email-user.component';
+import {UpdateUsernameUserComponent} from './components/update-username-user/update-username-user.component';
+import {UpdatePasswordUserComponent} from './components/update-password-user/update-password-user.component';
 
 @NgModule({
     imports: [
@@ -56,11 +56,12 @@ import { UpdatePasswordUserComponent } from './components/update-password-user/u
         UpdateEmailUserComponent,
         UpdateUsernameUserComponent,
         UpdatePasswordUserComponent
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
+    ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

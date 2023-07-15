@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Nugget} from '../models';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
@@ -8,22 +8,45 @@ import {GetAllResponse} from "./models/nuggets/getAllResponse";
     providedIn: 'root'
 })
 export class NuggetService {
-    constructor(private http: HttpClient) {
+    http = inject(HttpClient)
+
+    create(title: string, content: string, files: any | undefined) {
+        let formData = new FormData()
+
+        formData.append('Title', title);
+        formData.append('Content', content);
+
+        formData = this.appendFileData(formData, files);
+
+        return this.http.post<string>(`${environment.apiUrl}/nugget`, formData);
     }
 
-    create(title: string, content: string) {
-        return this.http.post(`${environment.apiUrl}/nugget`, {title, content});
+    update(id: string, title: string, content: string, files: any | undefined) {
+        let formData = new FormData()
+        formData.append('Id', id);
+        formData.append('Title', title);
+        formData.append('Content', content);
+
+        formData = this.appendFileData(formData, files);
+
+        return this.http.put(`${environment.apiUrl}/nugget/${id}`, formData);
     }
 
-    update(id: string, title: string, content: string) {
-        return this.http.put(`${environment.apiUrl}/nugget/${id}`, {
-            Title: title,
-            Content: content
-        });
+    private appendFileData(formData: FormData, files: any | undefined){
+        if (files != undefined && files.length > 0) {
+            const fileToUpload = <File>files[0];
+            formData.append('File', fileToUpload, fileToUpload.name);
+        }
+
+        return formData;
     }
 
     delete(id: string) {
         return this.http.delete(`${environment.apiUrl}/nugget/${id}`);
+    }
+
+    deleteImage(id: string) {
+        return this.http.delete(`${environment.apiUrl}/nugget/${id}/image`);
     }
 
     get(id: string) {

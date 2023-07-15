@@ -1,75 +1,83 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Nugget} from "../../models";
 import {AuthenticationService, NuggetService} from "../../services";
 import {RedirectService} from "../../services/redirect.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-list-nugget-user',
-  templateUrl: './list-nugget-user.component.html'
+    selector: 'app-list-nugget-user',
+    templateUrl: './list-nugget-user.component.html'
 })
-export class ListNuggetUserComponent {
-  itemsPerPage = 5;
-  currentPage = 1;
+export class ListNuggetUserComponent implements OnDestroy {
+    nuggetService = inject(NuggetService)
+    redirect = inject(RedirectService)
+    authenticationService = inject(AuthenticationService)
+    modalService = inject(NgbModal)
 
-  nuggets: Nugget[] = [];
-  userId = '';
-  userIsAdmin = false;
-  deleteNuggetId = '';
-  totalItemsPages = 0;
-  nbPage = 0;
+    subscriptions: Subscription[] = []
 
-  constructor(
-      private nuggetService: NuggetService,
-      private redirect: RedirectService,
-      private authenticationService: AuthenticationService,
-      private modalService: NgbModal
-  ) {
-  }
+    itemsPerPage = 5;
+    currentPage = 1;
 
-  ngOnInit() {
-    this.userId = this.authenticationService.GetUserFromToken?.id || ''
-    this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
+    nuggets: Nugget[] = [];
+    userId = '';
+    userIsAdmin = false;
+    deleteNuggetId = '';
+    totalItemsPages = 0;
+    nbPage = 0;
 
-    this.getNuggets();
-  }
+    ngOnInit() {
+        this.userId = this.authenticationService.GetUserFromToken?.id || ''
+        this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
-  getNuggets() {
-    this.nuggetService.getListByUserId(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
-        .subscribe(result => {
-          this.nuggets = result.nuggets;
-          this.totalItemsPages = result.nbOfNuggets
-          this.nbPage = this.getNbOfPage(this.totalItemsPages)
-        })
-  }
+        this.getNuggets();
+    }
 
-  previousPage() {
-    this.currentPage = this.currentPage == 1 ? 1 : this.currentPage - 1;
-    this.getNuggets();
-  }
+    getNuggets() {
+        const subscription = this.nuggetService.getListByUserId(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
+            .subscribe(result => {
+                this.nuggets = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.urlImage, n.creator, n.createdAt));
+                this.totalItemsPages = result.nbOfNuggets
+                this.nbPage = this.getNbOfPage(this.totalItemsPages)
+            })
 
-  nextPage() {
-    this.currentPage = this.currentPage == this.nbPage ? this.nbPage : this.currentPage + 1;
-    this.getNuggets();
-  }
+        this.subscriptions.push(subscription)
+    }
 
-  update(id: string) {
-    this.redirect.toUpdateNugget(id);
-  }
+    previousPage() {
+        this.currentPage = this.currentPage == 1 ? 1 : this.currentPage - 1;
+        this.getNuggets();
+    }
 
-  delete() {
-    this.nuggetService.delete(this.deleteNuggetId).subscribe(_ => {
-      this.ngOnInit();
-    });
-  }
+    nextPage() {
+        this.currentPage = this.currentPage == this.nbPage ? this.nbPage : this.currentPage + 1;
+        this.getNuggets();
+    }
 
-  open(content: any, nuggetId: string) {
-    this.deleteNuggetId = nuggetId;
+    update(id: string) {
+        this.redirect.toUpdateNugget(id);
+    }
 
-    this.modalService.open(content).result.then();
-  }
+    delete() {
+        const subscription = this.nuggetService.delete(this.deleteNuggetId).subscribe(_ => {
+            this.ngOnInit();
+        });
 
-  getNbOfPage(nbOfNuggets : number){
-    return Math.ceil(nbOfNuggets / this.itemsPerPage);
-  }
+        this.subscriptions.push(subscription)
+    }
+
+    open(content: any, nuggetId: string) {
+        this.deleteNuggetId = nuggetId;
+
+        this.modalService.open(content).result.then();
+    }
+
+    getNbOfPage(nbOfNuggets: number) {
+        return Math.ceil(nbOfNuggets / this.itemsPerPage);
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+    }
 }

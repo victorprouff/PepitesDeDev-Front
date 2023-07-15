@@ -8,7 +8,6 @@
     </div>
     <div class="col"></div>
 </div>
-
 <div class="card mt-5">
     <div class="card-body">
         <form [formGroup]="createNuggetForm" (ngSubmit)="onSubmit()">
@@ -33,10 +32,18 @@
                     <div *ngIf="f.content.errors.required">Veuillez remplir le contenu de votre pépite</div>
                 </div>
             </div>
-            <button [disabled]="loading" class="btn btn-primary">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Créer
-            </button>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Choisir une image...</label>
+                <input class="form-control" #file type="file" id="formFile" (click)="file.click()" (change)="uploadFile(file.files)">
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Créer
+                </button>
+            </div>
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>
     </div>
