@@ -29,6 +29,7 @@ export class NuggetsListComponent implements OnDestroy {
     nbPage = 0;
 
     ngOnInit() {
+        console.log('list-nuggets')
         this.userId = this.authenticationService.GetUserFromToken?.id || ''
         this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 

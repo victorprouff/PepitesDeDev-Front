@@ -31,6 +31,7 @@ export class NuggetComponent implements OnDestroy{
     currentPage = 1;
 
     ngOnInit(): void {
+        console.log("app-nugget")
         this.userId = this.authenticationService.GetUserFromToken?.id || ''
         this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
