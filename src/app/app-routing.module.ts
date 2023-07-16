@@ -13,6 +13,7 @@ import {NuggetComponent} from "./components/nugget/nugget.component";
 
 const routes: Routes = [
     {path: '', component: NuggetsListComponent},
+    {path: 'nugget/:id', component: NuggetComponent},
     {path: 'login', component: LoginComponent},
     {path: 'add-user', component: AddUserComponent},
     {path: 'add-nugget', component: AddNuggetComponent, canActivate: [AuthGuard]},
