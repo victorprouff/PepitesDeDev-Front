@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="card-body">
-        <img *ngIf="nugget != undefined && nugget!.urlImage != null" src="{{nugget!.urlImage}}" alt="" class="rounded mx-auto d-block img-size">
+        <img *ngIf="nugget != undefined && nugget!.urlImage != null" src="{{nugget!.urlImage}}" alt="" class="rounded mx-auto d-block img-size pb-3">
         <markdown *ngIf="nugget != undefined" lineNumbers>{{nugget!.content}}</markdown>
     </div>
 </div>

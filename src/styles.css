@@ -4,7 +4,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .img-size {
-    height: 600px;
+    height: auto;
+    max-height: 700px;
+    max-width: 100%;
 }
 
 .container-marge-top-bottom {
