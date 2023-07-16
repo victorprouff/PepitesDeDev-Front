@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Nugget} from '../../models';
 import {AuthenticationService, NuggetService} from '../../services';
 import {ActivatedRoute} from "@angular/router";
@@ -11,20 +11,11 @@ import {Subscription} from "rxjs";
     templateUrl: './nugget.component.html'
 })
 export class NuggetComponent implements OnDestroy{
-    /*Activatedroute = inject(ActivatedRoute)
+    Activatedroute = inject(ActivatedRoute)
     nuggetService = inject(NuggetService)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
-    modalService = inject(NgbModal)*/
-
-    constructor(
-        private Activatedroute: ActivatedRoute,
-        private nuggetService: NuggetService,
-        private redirect: RedirectService,
-        private authenticationService: AuthenticationService,
-        private modalService: NgbModal
-    ){
-    }
+    modalService = inject(NgbModal)
 
     subscriptions: Subscription[] = []
 
