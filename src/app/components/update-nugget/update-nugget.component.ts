@@ -73,7 +73,7 @@ export class UpdateNuggetComponent implements OnDestroy {
         this.error = '';
         this.loading = true;
 
-        const subscription = this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.file)
+        const subscription = this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.file as File)
             .pipe(first())
             .subscribe({
                 next: () => {

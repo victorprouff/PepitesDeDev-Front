@@ -34,7 +34,7 @@ export class NuggetService {
 
     private appendFileData(formData: FormData, files: any | undefined){
         if (files != undefined && files.length > 0) {
-            const fileToUpload = <File>files[0];
+            const fileToUpload = files[0] as File;
             formData.append('File', fileToUpload, fileToUpload.name);
         }
 
