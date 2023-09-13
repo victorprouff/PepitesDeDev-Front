@@ -37,7 +37,7 @@ export class ListNuggetUserComponent implements OnDestroy {
     getNuggets() {
         const subscription = this.nuggetService.getListByUserId(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
             .subscribe(result => {
-                this.nuggets = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.urlImage, n.creator, n.createdAt));
+                this.nuggets = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.isEnabled, n.urlImage, n.creator, n.createdAt));
                 this.totalItemsPages = result.nbOfNuggets
                 this.nbPage = this.getNbOfPage(this.totalItemsPages)
             })

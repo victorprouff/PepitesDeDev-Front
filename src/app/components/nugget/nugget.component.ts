@@ -59,7 +59,7 @@ export class NuggetComponent implements OnDestroy{
         const subscription = this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
             .subscribe(
                 (result) => {
-                    this.nugget = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.urlImage, n.creator, n.createdAt))[0];
+                    this.nugget = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.isEnabled, n.urlImage, n.creator, n.createdAt))[0];
                     this.totalItemsPages = result.nbOfNuggets
                     this.nbPage = this.getNbOfPage(this.totalItemsPages)
                 });

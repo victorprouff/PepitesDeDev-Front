@@ -33,14 +33,24 @@
                 </div>
             </div>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Modifier
-                </button>
+            <div class="row align-items-center">
+                <div class="col"></div>
+                <div class="col-lg-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="isEnabled" formControlName="isEnabled">
+                        <label class="form-check-label" for="isEnabled"><span>Rendre visible</span></label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Modifier
+                        </button>
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
             </div>
-            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-
         </form>
     </div>
 </div>
