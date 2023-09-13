@@ -8,7 +8,7 @@
     <li [ngbNavItem]="2" *ngIf="userIsAdmin">
         <button ngbNavLink><h4>Toutes les pépites</h4></button>
         <ng-template ngbNavContent>
-            <app-nuggets-list></app-nuggets-list>
+            <app-nuggets-list [withDisabledNugget]="true"></app-nuggets-list>
         </ng-template>
     </li>
     <li [ngbNavItem]="3">

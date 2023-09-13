@@ -55,10 +55,11 @@ export class NuggetService {
         return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
     }
 
-    getList(limit: number, offset: number) {
+    getList(limit: number, offset: number, withDisabledNugget: boolean = false) {
         return this.http.get<GetAllResponse>(`${environment.apiUrl}/nugget`,
             {
                 params: {
+                    withDisabledNugget: withDisabledNugget,
                     limit: limit,
                     offset: offset
                 }

@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy} from '@angular/core';
+import {Component, inject, Input, OnDestroy} from '@angular/core';
 import {Nugget} from "../../models";
 import {AuthenticationService, NuggetService} from "../../services";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -10,6 +10,8 @@ import {Subscription} from "rxjs";
     templateUrl: './nuggets-list.component.html'
 })
 export class NuggetsListComponent implements OnDestroy {
+    @Input() withDisabledNugget= false;
+
     nuggetService = inject(NuggetService)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
@@ -37,7 +39,7 @@ export class NuggetsListComponent implements OnDestroy {
     }
 
     getNuggets() {
-        const subscription = this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
+        const subscription = this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage, this.withDisabledNugget)
             .subscribe(result => {
                     this.nuggets = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.isEnabled, n.urlImage, n.creator, n.createdAt));
 

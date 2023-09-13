@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
     templateUrl: './nugget.component.html'
 })
 export class NuggetComponent implements OnDestroy{
-    Activatedroute = inject(ActivatedRoute)
+    ActivatedRoute = inject(ActivatedRoute)
     nuggetService = inject(NuggetService)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
@@ -35,7 +35,7 @@ export class NuggetComponent implements OnDestroy{
         this.userId = this.authenticationService.GetUserFromToken?.id || ''
         this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
-        const subscription = this.Activatedroute.paramMap.subscribe(paramMap => {
+        const subscription = this.ActivatedRoute.paramMap.subscribe(paramMap => {
             const id = paramMap.get('id') || '';
             this.getNugget(id);
         });
