@@ -10,11 +10,12 @@ import {GetAllResponse} from "./models/nuggets/getAllResponse";
 export class NuggetService {
     http = inject(HttpClient)
 
-    create(title: string, content: string, files: any | undefined) {
+    create(title: string, content: string, isEnabled: boolean, files: any | undefined) {
         let formData = new FormData()
 
         formData.append('Title', title);
         formData.append('Content', content);
+        formData.append('IsEnabled', isEnabled.toString());
 
         formData = this.appendFileData(formData, files);
 

@@ -29,7 +29,8 @@ export class AddNuggetComponent implements OnDestroy {
     ngOnInit() {
         this.createNuggetForm = this.formBuilder.group({
             title: ['', Validators.required],
-            content: [this.content, Validators.required]
+            content: [this.content, Validators.required],
+            isEnabled: [false]
         });
     }
 
@@ -49,7 +50,7 @@ export class AddNuggetComponent implements OnDestroy {
         this.error = '';
         this.loading = true;
 
-        const subscription = this.nuggetService.create(this.f.title.value, this.f.content.value, this.file as File)
+        const subscription = this.nuggetService.create(this.f.title.value, this.f.content.value, this.f.isEnabled.value, this.file as File)
             .pipe(first())
             .subscribe({
                 next: (nuggetId) => {
