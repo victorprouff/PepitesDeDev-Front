@@ -3,6 +3,7 @@ interface Nugget {
     userId: string;
     title: string;
     content: string;
+    isEnabled: boolean;
     urlImage: string | null;
     creator: string;
     createdAt: Date;

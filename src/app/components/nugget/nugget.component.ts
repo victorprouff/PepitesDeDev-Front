@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
     templateUrl: './nugget.component.html'
 })
 export class NuggetComponent implements OnDestroy{
-    Activatedroute = inject(ActivatedRoute)
+    ActivatedRoute = inject(ActivatedRoute)
     nuggetService = inject(NuggetService)
     redirect = inject(RedirectService)
     authenticationService = inject(AuthenticationService)
@@ -35,7 +35,7 @@ export class NuggetComponent implements OnDestroy{
         this.userId = this.authenticationService.GetUserFromToken?.id || ''
         this.userIsAdmin = this.authenticationService.GetUserFromToken?.isAdmin || false;
 
-        const subscription = this.Activatedroute.paramMap.subscribe(paramMap => {
+        const subscription = this.ActivatedRoute.paramMap.subscribe(paramMap => {
             const id = paramMap.get('id') || '';
             this.getNugget(id);
         });
@@ -59,7 +59,7 @@ export class NuggetComponent implements OnDestroy{
         const subscription = this.nuggetService.getList(this.itemsPerPage, (this.currentPage - 1) * this.itemsPerPage)
             .subscribe(
                 (result) => {
-                    this.nugget = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.urlImage, n.creator, n.createdAt))[0];
+                    this.nugget = result.nuggets.map((n) => new Nugget(n.id, n.userId, n.title, n.content, n.isEnabled, n.urlImage, n.creator, n.createdAt))[0];
                     this.totalItemsPages = result.nbOfNuggets
                     this.nbPage = this.getNbOfPage(this.totalItemsPages)
                 });

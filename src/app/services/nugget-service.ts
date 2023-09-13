@@ -10,22 +10,24 @@ import {GetAllResponse} from "./models/nuggets/getAllResponse";
 export class NuggetService {
     http = inject(HttpClient)
 
-    create(title: string, content: string, files: any | undefined) {
+    create(title: string, content: string, isEnabled: boolean, files: any | undefined) {
         let formData = new FormData()
 
         formData.append('Title', title);
         formData.append('Content', content);
+        formData.append('IsEnabled', isEnabled.toString());
 
         formData = this.appendFileData(formData, files);
 
         return this.http.post<string>(`${environment.apiUrl}/nugget`, formData);
     }
 
-    update(id: string, title: string, content: string, files: any | undefined) {
+    update(id: string, title: string, content: string, isEnabled: boolean, files: any | undefined) {
         let formData = new FormData()
         formData.append('Id', id);
         formData.append('Title', title);
         formData.append('Content', content);
+        formData.append('IsEnabled', isEnabled.toString());
 
         formData = this.appendFileData(formData, files);
 
@@ -53,10 +55,11 @@ export class NuggetService {
         return this.http.get<Nugget>(`${environment.apiUrl}/nugget/${id}`);
     }
 
-    getList(limit: number, offset: number) {
+    getList(limit: number, offset: number, withDisabledNugget: boolean = false) {
         return this.http.get<GetAllResponse>(`${environment.apiUrl}/nugget`,
             {
                 params: {
+                    withDisabledNugget: withDisabledNugget,
                     limit: limit,
                     offset: offset
                 }

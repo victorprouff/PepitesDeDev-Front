@@ -40,7 +40,8 @@ export class UpdateNuggetComponent implements OnDestroy {
 
         this.updateNuggetForm = this.formBuilder.group({
             title: [''],
-            content: ['']
+            content: [''],
+            isEnabled: ['']
         });
 
         const subscription2 = this.nuggetService.get(this.id).subscribe(nugget => {
@@ -49,6 +50,7 @@ export class UpdateNuggetComponent implements OnDestroy {
 
             this.updateNuggetForm.get('title')!.setValue(this.nugget.title)
             this.updateNuggetForm.get('content')!.setValue(this.nugget.content)
+            this.updateNuggetForm.get('isEnabled')!.setValue(this.nugget.isEnabled)
 
             if (this.authenticationService.GetUserFromToken?.id != this.nugget?.userId && !this.userIsAdmin) {
                 this.redirect.toHome();
@@ -73,7 +75,7 @@ export class UpdateNuggetComponent implements OnDestroy {
         this.error = '';
         this.loading = true;
 
-        const subscription = this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.file as File)
+        const subscription = this.nuggetService.update(this.id, this.f.title.value, this.f.content.value, this.f.isEnabled.value, this.file as File)
             .pipe(first())
             .subscribe({
                 next: () => {
