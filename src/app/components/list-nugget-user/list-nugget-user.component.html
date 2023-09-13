@@ -21,6 +21,9 @@
                     Le {{nugget.createdAt | date:'d MMM yyyy - h:mm' }} par {{nugget.creator}}
                 </div>
                 <div class="col-md-2 d-flex justify-content-end align-items-start btn-group" role="group" *ngIf="userId == nugget?.userId && nugget != undefined || userIsAdmin">
+                    <div class="icon-in-btn-group">
+                        <mat-icon class="align-middle">{{nugget.isEnabled ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </div>
                     <button type="button" class="btn btn-outline-primary" (click)="update(nugget.id)">
                         <mat-icon class="align-middle">edit_note</mat-icon>
                     </button>
